@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="roleCustomerTests_test">
+		<parameter name="username" value="CUST_TEST" />
+		<parameter name="password" value="CUST_TEST" />
+		<parameter name="role" value="Заказчик по содержанию ОДХ" />
+		<test name = "UserLoginAsCustomer">
+		<classes>
+			<class name="ru.fors.tests.LoginTests"/>
+		</classes>
+		</test>
+</suite>
