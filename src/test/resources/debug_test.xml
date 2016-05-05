@@ -36,4 +36,14 @@
 			</class>
 		</classes>
 		</test>
+	<test name = "MatchTests">
+		<classes>
+			<class name="ru.fors.tests.TeamsTests">
+				<methods>
+					<exclude name=".*" />
+					<include name="userCreateMatchTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
 </suite>
