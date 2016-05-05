@@ -9,10 +9,10 @@
   <properties>
 	  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	  	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	  	<allure.version>1.4.16</allure.version>
-        <aspectj.version>1.8.5</aspectj.version>
-		<selenium.version>2.48.2</selenium.version>
-	  	<url>http://google.ru</url>
+	  	<allure.version>1.5.0.RC2</allure.version>
+        <aspectj.version>1.8.9</aspectj.version>
+		<selenium.version>2.53.0</selenium.version>
+	  	<url>http://smcp-cloud.fors.ru/pls/apex/f?p=706:LOGIN</url>
 	  	<wait.seconds>30</wait.seconds>
    </properties>
 
@@ -20,12 +20,12 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.8.8</version>
+			<version>6.9.10</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -55,7 +55,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
+				<version>2.7</version>
 				<configuration>
 				<encoding>UTF-8</encoding>
 				</configuration>  
@@ -63,7 +63,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.10.v20150310</version>
+                <version>9.3.9.M1</version>
                 <configuration>
                     <webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
                     <stopKey>stop</stopKey>
@@ -72,7 +72,7 @@
             </plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
+				<version>2.19.1</version>
 				<configuration>
 					<testFailureIgnore>false</testFailureIgnore>
 					<argLine>-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar</argLine>
@@ -96,7 +96,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.5.1</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -108,9 +108,9 @@
         <excludeDefaults>true</excludeDefaults>
         <plugins>
             <plugin>
-                <groupId>ru.yandex.qatools.allure</groupId>
-                <artifactId>allure-maven-plugin</artifactId>
-                <version>2.2</version>
+				<groupId>ru.yandex.qatools.allure</groupId>
+				<artifactId>allure-maven-plugin</artifactId>
+				<version>2.5</version>
             </plugin>
         </plugins>
     </reporting>

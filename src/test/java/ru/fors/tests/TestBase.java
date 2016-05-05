@@ -1,11 +1,14 @@
 package ru.fors.tests;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import ru.fors.data.Player;
+import ru.fors.data.Team;
 import ru.fors.pages.LoginPage;
 import ru.fors.pages.MainPage;
 import ru.fors.utils.Browser;
@@ -16,6 +19,9 @@ public class TestBase {
 	
 	protected static WebDriver driver;
 	public String baseUrl;
+	public static Team team = new Team();
+	public static Player player = new Player();
+
 	
 	@BeforeTest
 	public void init(){
@@ -40,7 +46,6 @@ public class TestBase {
 	public void userLogin(String username, String password){
 		LoginPage loginPage = new LoginPage(driver);
 		MainPage mainPage = loginPage.userLogin(username, password);
-		mainPage.waitForPageLoaded();
 	}
 	
 	public static WebDriver getWebDriver(){

@@ -1,5 +1,8 @@
 package ru.fors.pages;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -18,6 +21,25 @@ public class Page {
 	public Page(WebDriver driver) {
 		this.driver = driver;
 		wait = new WebDriverWait(driver, Long.parseLong(PropertyLoader.loadProperty("wait")));
+	}
+
+	Date currentDate = new Date(System.currentTimeMillis());
+	Date yesterday = new Date(System.currentTimeMillis()-86400000);
+	DateFormat timeFormat = new SimpleDateFormat("HHmmss");
+	DateFormat date = new SimpleDateFormat("dd.MM.YYYY");
+
+	public boolean ensurePageLoaded(By element){
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+			return true;
+		} catch (Exception e){
+			return false;
+		}
+
+	}
+
+	public String getPageTitle(){
+		return driver.getTitle();
 	}
 	
 	public void type(By element, String string){

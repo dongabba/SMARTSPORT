@@ -14,9 +14,9 @@ public class LoginPage extends Page {
 	}
 
 
-	By usernameField = By.name("username");
-	By passwordField = By.name("password");
-	By loginButton = By.linkText("Войти");
+	By usernameField = By.id("P101_USERNAME");
+	By passwordField = By.id("P101_PASSWORD");
+	By loginButton = By.id("P101_LOGIN");
 
 
 	@Step("Пользователь входит в систему {0}")

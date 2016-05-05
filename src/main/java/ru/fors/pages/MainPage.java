@@ -11,22 +11,28 @@ public class MainPage extends Page {
 	public MainPage(WebDriver driver) {
 		super(driver);
 	}
-	By userRole = By.xpath("//*[@id='logo']/div/div[2]");
-	By logoutLink = By.linkText("Выход");
+	By userRole = By.id("username");
+	By DE_MainPageLInk = By.linkText("DE");
 
+    @Step("Проверяем открылась ли страница")
+	public boolean isPageLoaded(){
+        return ensurePageLoaded(userRole);
+    }
 
-	public MainPage waitForPageLoaded(){
-		wait.until(ExpectedConditions.visibilityOfElementLocated(userRole));
-		return this;
-	}
 	@Step("Проверяем роль пользователя")
 	public String getUserRole(){
 		return getElementText(userRole);
 	}
 	
 	@Step("Пользователь выходит из системы")
-	public LoginPage userLogOut(){
+	public LoginPage userLogOut(By logoutLink){
 		click(logoutLink);
 		return new LoginPage(driver);
+	}
+
+	@Step("Пользователь переходит на немецкую версию сайта")
+	public MainPageDE userGoToMainPageDE(){
+		click(DE_MainPageLInk);
+		return new MainPageDE(driver);
 	}
 }

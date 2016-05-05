@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="roleAdminTest">
+		<parameter name="username" value="azhaleiko" />
+		<parameter name="password" value="123456" />
+		<parameter name="role" value="Александр Жалейко" />
+		<test name = "UserLoginAsAdmin">
+		<classes>
+			<class name="ru.fors.tests.LoginTests"/>
+		</classes>
+		</test>
+		<test name = "UserCreateTeam">
+		<classes>
+			<class name="ru.fors.tests.TeamsTests"/>
+		</classes>
+		</test>
+</suite>
