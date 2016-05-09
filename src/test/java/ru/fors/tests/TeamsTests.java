@@ -34,7 +34,7 @@ public class TeamsTests extends TestBase{
         assertTrue("Не открылся раздел Команды", teamsPageDE.ensureTeamsPageLoaded());
         teamsPageDE.userClickCreateButton();
         assertTrue("Не открылся раздел создания команды", teamsPageDE.ensurecreateTeamPageLoaded());
-        team = teamsPageDE.userCreateTeam();
+        teamsPageDE.userCreateTeam();
         assertTrue("Не создалась команда", teamsPageDE.isCreatedOk());
     }
     @Features("Работа с объектом \"Команда\"")
@@ -43,8 +43,8 @@ public class TeamsTests extends TestBase{
     public void userEditTeamTest(){
         TeamsPageDE teamsPageDE = new TeamsPageDE(driver);
         teamsPageDE.userClickTeamsLink();
-        teamsPageDE.userEditTeam(team.getName());
-        teamsPageDE.userAddPlayerToTeam(player.getFamily(), player.getName());
+        teamsPageDE.userEditTeam();
+        teamsPageDE.userAddPlayerToTeam();
         assertTrue("Не добавился игрок в команду", teamsPageDE.isCreatedOk());
     }
 
@@ -58,7 +58,7 @@ public class TeamsTests extends TestBase{
         assertTrue("Не открылся раздел Игроки", playersPageDE.ensurePlayersPageOpen());
         playersPageDE.userClickCreateButton();
         assertTrue("Не открылся раздел создания игрока", playersPageDE.ensureCreatePageOpen());
-        player = playersPageDE.userCreatePlayer();
+        playersPageDE.userCreatePlayer();
         assertTrue("Не создалася игрок", playersPageDE.isCreatedOk());
     }
 
@@ -82,12 +82,17 @@ public class TeamsTests extends TestBase{
     public void userCreateCoachTest(){
         MainPage mainPage = new MainPage(driver);
         MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
-        CoachPageDE coachPageDE = mainPageDE.userGoToСoachesPage();
-        assertTrue("Не открылся раздел Тренер", coachPageDE.isCoachPageLoaded());
-        coachPageDE.userClickCreateButton();
-        assertTrue("Не открылся раздел создания тренера", coachPageDE.isCoachCreatedPageLoaded());
-        coachPageDE.userCreateCoach();
-        assertTrue("Не создалася тренер", coachPageDE.isCreatedOk());
+        CoachPageDE coachPageDE = new CoachPageDE(driver);
+        for (int i=0; i<3; i++) {
+            mainPageDE.userGoToСoachesPage();
+            assertTrue("Не открылся раздел Тренер", coachPageDE.isCoachPageLoaded());
+            coachPageDE.userClickCreateButton();
+            assertTrue("Не открылся раздел создания тренера", coachPageDE.isCoachCreatedPageLoaded());
+            coachPageDE.userCreateCoach();
+            assertTrue("Не создалася тренер", coachPageDE.isCreatedOk());
+            coachPageDE.m
+        }
+        coachPageDE.printCoaches();
     }
 
     @Features("Работа с объектом \"Тренер\"")

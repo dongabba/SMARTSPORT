@@ -4,15 +4,14 @@
 		<parameter name="username" value="azhaleiko" />
 		<parameter name="password" value="123456" />
 		<parameter name="role" value="Александр Жалейко" />
-		<test name = "UserCreatePlayer">
+	<test name = "TeamTests">
 		<classes>
 			<class name="ru.fors.tests.TeamsTests">
-			<methods>
-				<exclude name=".*" />
-				<include name="userCreateCoachTest" />
-                <include name="userAddCoachToTeamTest" />
-			</methods>
+				<methods>
+					<exclude name=".*" />
+					<include name="userCreateCoachTest" />
+				</methods>
 			</class>
 		</classes>
-		</test>
+	</test>
 </suite>

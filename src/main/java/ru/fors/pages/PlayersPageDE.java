@@ -57,19 +57,17 @@ public class PlayersPageDE extends ObjectsPage{
         click(subPositionCheckBox);
     }
 
-    public Player userCreatePlayer(){
-        Player player = new Player();
-        player.setName("Bastian"+timeFormat.format(currentDate));
-        player.setFamily("Schweinsteiger"+timeFormat.format(currentDate));
+    public void userCreatePlayer(){
+        player.setName(getValueFromList(namesDE));
+        player.setFamily(getValueFromList(familysDE));
         userTypePlayerFamily(player.getFamily());
         userTypePlayerName(player.getName());
-        userTypePlayerBirthPlace("Kolbermoor");
+        userTypePlayerBirthPlace(getValueFromList(citiesDE));
         userTypePlayerBornDate("01.08.1984");
         userSelectPlayerFoot();
         userSelectPlayerPosition();
         userSelectPlayerSubposition();
         userClickCreateButton();
-        return player;
     }
 
 

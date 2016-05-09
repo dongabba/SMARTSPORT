@@ -19,8 +19,6 @@ public class TestBase {
 	
 	protected static WebDriver driver;
 	public String baseUrl;
-	public static Team team = new Team();
-	public static Player player = new Player();
 
 	
 	@BeforeTest

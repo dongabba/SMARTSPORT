@@ -44,19 +44,19 @@ public class CoachPageDE extends ObjectsPage{
 
     @Step("Пользователь указыват имя тренера")
     public void userTypeCoachName(){
-        coach.setName("Josep"+timeFormat.format(currentDate));
+        coach.setName(getValueFromList(namesDE));
         type(coachName, coach.getName());
     }
 
     @Step("Пользователь указыват фамилию тренера")
     public void userTypeCoachFamily(){
-        coach.setFamily("Guardiola"+timeFormat.format(currentDate));
+        coach.setFamily(getValueFromList(familysDE));
         type(coachFamily, coach.getFamily());
     }
 
     @Step("Пользователь указыват город рождения тренера")
     public void userTypeCoachBirthPlace(){
-        type(coachBirthPlace, "Santpedor");
+        type(coachBirthPlace, getValueFromList(citiesDE));
     }
 
     @Step("Пользователь указыват год рождения тренера")
@@ -71,6 +71,13 @@ public class CoachPageDE extends ObjectsPage{
         userTypeCoachBirthPlace();
         userTypeCoachBornDate();
         userClickCreateButton();
+        coachList.add(coach);
+    }
+
+    public void printCoaches(){
+        for (int i=0; i<=coachList.size(); i++){
+            System.out.println(coachList.get(i).getName()+" "+coachList.get(i).getFamily());
+        }
     }
 
     @Step("Пользователь переходит в раздел Контакты")
@@ -126,8 +133,8 @@ public class CoachPageDE extends ObjectsPage{
                        }
                 );
         driver.switchTo().window(newWindow);
-        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Dinamo190120")));
-        click(By.linkText("Dinamo190120"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText(team.getName())));
+        click(By.linkText(team.getName()));
         //wait.until(ExpectedConditions.invisibilityOfElementLocated(cityLink));
         driver.switchTo().window(originalWindow);
     }

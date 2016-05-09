@@ -28,7 +28,6 @@ public class TeamsPageDE extends ObjectsPage {
     By citySelectButton = By.xpath("//*[@id='P1306_CITY_ID_holder']//img");
     By ageGroupSelect = By.id("P1306_AGE_GROUP");
     By descriptionField = By.id("P1306_DESCRIPTION");
-    By cityLink = By.linkText("GAGRA (ABKHAZIYA)");
     By searchField = By.id("apexir_SEARCH");
     By searchResultLink = By.xpath("//tbody/tr[2]/td[1]/a/img");
     By searchComplete = By.id("apexir_CONTROL_PANEL_COMPLETE");
@@ -65,8 +64,8 @@ public class TeamsPageDE extends ObjectsPage {
                        }
                 );
         driver.switchTo().window(newWindow);
-        wait.until(ExpectedConditions.elementToBeClickable(cityLink));
-        click(cityLink);
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText(getValueFromList(cityForTeams))));
+        click(By.linkText(getValueFromList(cityForTeams)));
         //wait.until(ExpectedConditions.invisibilityOfElementLocated(cityLink));
         driver.switchTo().window(originalWindow);
     }
@@ -88,21 +87,19 @@ public class TeamsPageDE extends ObjectsPage {
         type(descriptionField, description);
     }
 
-    public Team userCreateTeam() {
-        Team team = new Team();
-        team.setName("Dinamo" + timeFormat.format(currentDate));
+    public void userCreateTeam() {
+        team.setName(getValueFromList(teamsDe));
         userTypeTeamName(team.getName());
-        userTypeShortTeamName("D" + timeFormat.format(currentDate));
+        userTypeShortTeamName("FC");
         userSelectCity();
         userSelectAgeGroup();
-        userTypeDescription("Description" + timeFormat.format(currentDate));
+        userTypeDescription(team.getName());
         userClickCreateButton();
         System.out.println("Создана команда: " + team.getName());
-        return team;
     }
 
-    public void userEditTeam(String teamName) {
-        userSearchTeam(teamName);
+    public void userEditTeam() {
+        userSearchTeam(team.getName());
         userOpenTeam();
         userGoToPlayersTeam();
     }
@@ -117,7 +114,7 @@ public class TeamsPageDE extends ObjectsPage {
     @Step("Пользователь выполняет поиск команды")
     public void userSearchTeam(String teamName) {
         type(searchField, teamName);
-        System.out.println("Выполняем поиск команды: " + teamName);
+        System.out.println("Выполняем поиск команды: " + team.getName());
         click(findButton);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchComplete));
     }
@@ -212,9 +209,9 @@ public class TeamsPageDE extends ObjectsPage {
 
 
     @Step("Пользователь добавляет игрока в команду")
-    public void userAddPlayerToTeam(String playerFamily, String playerName){
+    public void userAddPlayerToTeam(){
         userClickAddPlayerButton();
-        userSelectPlayerForTeam(playerFamily, playerName);
+        userSelectPlayerForTeam(player.getFamily(), player.getName());
         userTypePlayerNumber();
         userSelectPlayerPosition();
         userSelectPlayerSubPosition();
