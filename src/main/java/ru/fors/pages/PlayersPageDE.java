@@ -58,16 +58,21 @@ public class PlayersPageDE extends ObjectsPage{
     }
 
     public void userCreatePlayer(){
-        player.setName(getValueFromList(namesDE));
-        player.setFamily(getValueFromList(familysDE));
-        userTypePlayerFamily(player.getFamily());
-        userTypePlayerName(player.getName());
-        userTypePlayerBirthPlace(getValueFromList(citiesDE));
-        userTypePlayerBornDate("01.08.1984");
-        userSelectPlayerFoot();
-        userSelectPlayerPosition();
-        userSelectPlayerSubposition();
-        userClickCreateButton();
+        for (int i=0;i<11;i++){
+            Player player = new Player();
+            player.setName(getValueFromList(namesDE));
+            player.setFamily(getValueFromList(familysDE));
+            userTypePlayerFamily(player.getFamily());
+            userTypePlayerName(player.getName());
+            userTypePlayerBirthPlace(getValueFromList(citiesDE));
+            userTypePlayerBornDate("01.08.1984");
+            userSelectPlayerFoot();
+            userSelectPlayerPosition();
+            userSelectPlayerSubposition();
+            userClickCreateButton();
+            playerList.add(player);
+        }
+
     }
 
 

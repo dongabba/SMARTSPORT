@@ -36,7 +36,10 @@ public class TeamsPageDE extends ObjectsPage {
     By teamPlayersTitle = By.xpath("//th[text()='Spieler']");
     By addPlayerButton = By.linkText("hinzufügen");
     By selectPlayerButton = By.xpath(".//*[@id='P313_PLAYER_ID_holder']//img");
+    By selectCoachButton = By.xpath(".//*[@id='P353_COACH_ID_holder']//img");
     By playerNumber = By.id("P313_PLAYER_NUMBER");
+    By teamCoachesLink = By.linkText("Trainerrat");
+    By teamCoachesTitle = By.xpath("//th[text()='Trainerrat']");
 
 
 
@@ -104,6 +107,17 @@ public class TeamsPageDE extends ObjectsPage {
         userGoToPlayersTeam();
     }
 
+    public void userEditTeam2() {
+        userSearchTeam(team.getName());
+        userOpenTeam();
+        userGoToCoachesTeam();
+    }
+
+    private void userGoToCoachesTeam() {
+        click(teamCoachesLink);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(teamCoachesTitle));
+    }
+
 
     @Step("Пользователь переходит в раздел команды")
     public void userClickTeamsLink() {
@@ -138,6 +152,13 @@ public class TeamsPageDE extends ObjectsPage {
 
     }
 
+    @Step("Пользователь нажмимает кнопку добавить тренерв")
+    public void userClickAddCoachButton(){
+        click(addPlayerButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(selectCoachButton));
+
+    }
+
     @Step("Пользователь выбирает игрока в команду")
     public void userSelectPlayerForTeam(String playerFamily, String playerName){
         By player = By.linkText(playerFamily+" "+playerName);
@@ -157,6 +178,29 @@ public class TeamsPageDE extends ObjectsPage {
         driver.switchTo().window(newWindow);
         wait.until(ExpectedConditions.elementToBeClickable(player));
         click(player);
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(cityLink));
+        driver.switchTo().window(originalWindow);
+    }
+
+    @Step("Пользователь добавляет тренера в команду")
+    public void userSelectCoachForTeam(String coachFamily, String coachName){
+        By coach = By.linkText(coachFamily+" "+coachName);
+        String originalWindow = driver.getWindowHandle();
+        final Set<String> oldWindowsSet = driver.getWindowHandles();
+        click(selectCoachButton);
+        String newWindow = (new WebDriverWait(driver, 10))
+                .until(new ExpectedCondition<String>() {
+                           public String apply(WebDriver driver) {
+                               Set<String> newWindowsSet = driver.getWindowHandles();
+                               newWindowsSet.removeAll(oldWindowsSet);
+                               return newWindowsSet.size() > 0 ?
+                                       newWindowsSet.iterator().next() : null;
+                           }
+                       }
+                );
+        driver.switchTo().window(newWindow);
+        wait.until(ExpectedConditions.elementToBeClickable(coach));
+        click(coach);
         //wait.until(ExpectedConditions.invisibilityOfElementLocated(cityLink));
         driver.switchTo().window(originalWindow);
     }
@@ -216,6 +260,33 @@ public class TeamsPageDE extends ObjectsPage {
         userSelectPlayerPosition();
         userSelectPlayerSubPosition();
         userClickCreateButton();
+    }
+
+    @Step("Пользователь добавляет тренера в команду")
+    public void userAddCoachToTeam(){
+        System.out.println("coachList size: "+coachList.size());
+        for (int i=0; i<coachList.size();i++){
+            userClickAddCoachButton();
+            userSelectCoachForTeam(coachList.get(i).getFamily(), coachList.get(i).getName());
+            userClickCreateButton();
+            wait.until(ExpectedConditions.presenceOfElementLocated(successMessage));
+        }
+
+    }
+
+    @Step("Пользователь добавляет игрока в команду")
+    public void userAddPlayerToTeam2(){
+        System.out.println("playerList size: "+playerList.size());
+        for (int i=0; i<playerList.size();i++){
+            userClickAddPlayerButton();
+            userSelectPlayerForTeam(playerList.get(i).getFamily(), playerList.get(i).getName());
+            userTypePlayerNumber();
+            userSelectPlayerPosition();
+            userSelectPlayerSubPosition();
+            userClickCreateButton();
+            wait.until(ExpectedConditions.presenceOfElementLocated(successMessage));
+        }
+
     }
 
 

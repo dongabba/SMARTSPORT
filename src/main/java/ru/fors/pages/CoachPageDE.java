@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.fors.data.Coach;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.Set;
@@ -43,15 +44,13 @@ public class CoachPageDE extends ObjectsPage{
     }
 
     @Step("Пользователь указыват имя тренера")
-    public void userTypeCoachName(){
-        coach.setName(getValueFromList(namesDE));
-        type(coachName, coach.getName());
+    public void userTypeCoachName(String name){
+        type(coachName, name);
     }
 
     @Step("Пользователь указыват фамилию тренера")
-    public void userTypeCoachFamily(){
-        coach.setFamily(getValueFromList(familysDE));
-        type(coachFamily, coach.getFamily());
+    public void userTypeCoachFamily(String family){
+        type(coachFamily, family);
     }
 
     @Step("Пользователь указыват город рождения тренера")
@@ -64,7 +63,7 @@ public class CoachPageDE extends ObjectsPage{
         type(coachBornDate, "18.01.1971");
     }
 
-    @Step("Пользователь создает тренера")
+    /*@Step("Пользователь создает тренера")
     public void userCreateCoach(){
         userTypeCoachFamily();
         userTypeCoachName();
@@ -73,9 +72,30 @@ public class CoachPageDE extends ObjectsPage{
         userClickCreateButton();
         coachList.add(coach);
     }
+    */
+
+    @Step("Пользователь создает тренера")
+    public void userCreateCoach2(){
+        for (int i=0; i<3; i++){
+            userGoToCoaches();
+            userClickCreateButton();
+            wait.until(ExpectedConditions.presenceOfElementLocated(coachFamily));
+            Coach coach = new Coach();
+            coach.setFamily(getValueFromList(familysDE));
+            coach.setName(getValueFromList(namesDE));
+            userTypeCoachFamily(coach.getFamily());
+            userTypeCoachName(coach.getName());
+            userTypeCoachBirthPlace();
+            userTypeCoachBornDate();
+            userClickCreateButton();
+            wait.until(ExpectedConditions.presenceOfElementLocated(successMessage));
+            userGoToContacts();
+            coachList.add(coach);
+        }
+    }
 
     public void printCoaches(){
-        for (int i=0; i<=coachList.size(); i++){
+        for (int i=0; i< coachList.size(); i++){
             System.out.println(coachList.get(i).getName()+" "+coachList.get(i).getFamily());
         }
     }
@@ -96,15 +116,15 @@ public class CoachPageDE extends ObjectsPage{
     public void userSelectAllCoaches(){
         Select select = new Select(driver.findElement(By.id("P12_ACTUAL_SELECTOR")));
         select.selectByValue("ALL");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(coach.getFamily())));
+       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(coach.getFamily())));
     }
 
-    @Step("Пользователь открывает созданного тренера")
+    /*@Step("Пользователь открывает созданного тренера")
     public void userOpenCoaches(){
         click(By.linkText(coach.getFamily()));
         wait.until(ExpectedConditions.visibilityOfElementLocated(createdCoachPageTitle));
     }
-
+    */
     @Step("Пользователь переходит к редактированию команды тренера")
     public void userGoToCoachTeam(){
         click(coachTeams);
@@ -149,7 +169,7 @@ public class CoachPageDE extends ObjectsPage{
         userGoToContacts();
         userGoToCoaches();
         userSelectAllCoaches();
-        userOpenCoaches();
+       // userOpenCoaches();
         userGoToCoachTeam();
         userOpenAddTeamPage();
         userSelectCoachTeam();

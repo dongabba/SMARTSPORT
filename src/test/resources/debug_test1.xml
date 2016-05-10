@@ -6,10 +6,12 @@
 		<parameter name="role" value="Александр Жалейко" />
 	<test name = "TeamTests">
 		<classes>
-			<class name="ru.fors.tests.TeamsTests">
+			<class name="ru.fors.tests.CreateTestData">
 				<methods>
 					<exclude name=".*" />
 					<include name="userCreateCoachTest" />
+					<include name="userCreateTeamTest" />
+					<include name="userEditTeamTest" />
 				</methods>
 			</class>
 		</classes>

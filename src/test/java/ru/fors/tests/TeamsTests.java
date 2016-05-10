@@ -88,9 +88,9 @@ public class TeamsTests extends TestBase{
             assertTrue("Не открылся раздел Тренер", coachPageDE.isCoachPageLoaded());
             coachPageDE.userClickCreateButton();
             assertTrue("Не открылся раздел создания тренера", coachPageDE.isCoachCreatedPageLoaded());
-            coachPageDE.userCreateCoach();
+            //oachPageDE.userCreateCoach();
             assertTrue("Не создалася тренер", coachPageDE.isCreatedOk());
-            coachPageDE.m
+            coachPageDE.userGoToContacts();
         }
         coachPageDE.printCoaches();
     }
