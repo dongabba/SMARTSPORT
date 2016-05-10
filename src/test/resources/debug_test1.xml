@@ -9,12 +9,14 @@
 			<class name="ru.fors.tests.CreateTestData">
 				<methods>
 					<exclude name=".*" />
-					<include name="userCreateCoachTest" />
+					<!-- <include name="userCreateCoachTest" />
 					<include name="userCreatePlayerTest" />
 					<include name="userCreateTeamTest" />
 					<include name="userAddCoachesToTeamTest" />
-					<include name="userAddPlayersToTeamTest" />
+					<include name="userAddPlayersToTeamTest" />-->
 					<include name="userCreateMatchTest" />
+					<include name="userChangeMatchStatusToPlanTest" />
+					<include name="userChangeMatchStatusToApplyTest" />
 				</methods>
 			</class>
 		</classes>

@@ -24,6 +24,10 @@ public class ObjectsPage extends Page{
     By createButton = By.linkText("erstellen");
     By contactPage = By.linkText("Kontakte");
     By contactPageTitle = By.xpath("//th[text()='Kontakte']");
+    By searchField = By.id("apexir_SEARCH");
+    By searchResultLink = By.xpath("//tbody/tr[2]/td[1]/a/img");
+    By searchComplete = By.id("apexir_CONTROL_PANEL_COMPLETE");
+    By findButton = By.id("apexir_btn_SEARCH");
 
     List<String> namesDE = Arrays.asList("Engelbert", "Helge", "Achim", "Erdmann", "Helmfried", "Nickolaus", "Adelbert", "Erhard", "Helmut", "Niklaus", "Adolf", "Erich", "Helmuth", "Alban", "Ernst", "Hendrik", "Ortwin", "Albrecht", "Erwin", "Henning", "Othmar", "Alfons", "Eugen", "Heribert", "Ottmar", "Alois", "Evert", "Hermann", "Otto", "Aloysius", "Hermenegild", "Ottokar", "Alwin", "Ferdi", "Hilbert", "Ottomar", "Amand", "Fester", "Hildebert", "Anselm", "Filibert", "Hildebrand", "Pankraz", "Ansgar", "Franz", "Hinrich", "Parsifal", "Armin", "Frej", "Horst", "Philipp", "Arndt", "Friedemann", "Huppert", "Poldi", "Arne", "Friedhelm", "Arnold", "Friedhold", "Ignatz", "Raffael", "August", "Friedrich", "Immanuel", "Reimund", "Aurel", "Fritz", "Ingo", "Reiner", "Ingolf", "Rambert", "Baldur", "Gabi", "Ivo", "Reimund", "Baptist", "Gabriel", "Rein", "Bartholomäus", "Gebbert", "Jochem", "Reiner", "Bastian", "Gebhard", "Jochen", "Reinhard", "Beat", "Geert", "Jochim", "Reinhold", "Benedikt", "Georg", "Johann", "Reto", "Benno", "Gerald", "Jörg", "Rüdiger", "Bernd", "Gerd", "Jürgen", "Bernhard", "Gereon", "Sascha", "Berthold", "Gerfried", "Karlmann", "Sepp", "Bonifaz", "Gerhard", "Karsten", "Seppel", "Bruno", "Gerhardt", "Kasimir", "Siegbert", "Burkhard", "Gerhold", "Kaspar", "Siegfried", "Gernot", "Kayetan", "Sieghard", "Carl", "Gero", "Kolman", "Siegmund", "Carsten", "Gerold", "Mose", "Helfried", "Xaver");
     List<String> familysDE = Arrays.asList("Mueller", "Schmidt", "Schneider", "Fischer", "Weber", "Schulz", "Wagner", "Becker", "Hoffmann", "Schaefer", "Koch", "Bauer", "Richter", "Klein", "Schroeder", "Wolf", "Neumann", "Schwarz", "Zimmermann", "Krueger", "Braun", "Schmitz", "Hartmann", "Lange", "Schmitt", "Werner", "Krause", "Meier", "Schmid", "Lehmann", "Schultze", "Maier", "Koehler", "Herrmann", "Walter", "Koenig", "Mayer", "Huber", "Kaiser", "Fuchs", "Peters", "Moeller", "Scholz", "Lang", "Weiss", "Jung", "Hahn");
@@ -61,6 +65,13 @@ public class ObjectsPage extends Page{
     public void userGoToContacts(){
         click(contactPage);
         wait.until(ExpectedConditions.visibilityOfElementLocated(contactPageTitle));
+    }
+
+    @Step("Пользователь выполняет поиск объекта")
+    public void userSearchObject(String objName) {
+        type(searchField, objName);
+        click(findButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchComplete));
     }
 
 }
