@@ -22,7 +22,7 @@ public class TeamsPageDE extends ObjectsPage {
 
     By pageTitle = By.xpath("//th[text()='Mannschaften']");
     By teamLink = By.linkText("Mannschaften");
-    By createTeamPageTitle = By.xpath("//th[text()='Basisinformationen']");
+    By createTeamPageTitle = By.linkText("Mannschaft");
     By teamNameField = By.id("P1306_NAME");
     By shortTeamNameField = By.id("P1306_SHORT_NAME");
     By citySelectButton = By.xpath("//*[@id='P1306_CITY_ID_holder']//img");
@@ -255,7 +255,7 @@ public class TeamsPageDE extends ObjectsPage {
     @Step("Пользователь добавляет игрока в команду")
     public void userAddPlayerToTeam(){
         userClickAddPlayerButton();
-        userSelectPlayerForTeam(player.getFamily(), player.getName());
+        //userSelectPlayerForTeam(player.getFamily(), player.getName());
         userTypePlayerNumber();
         userSelectPlayerPosition();
         userSelectPlayerSubPosition();
@@ -279,6 +279,7 @@ public class TeamsPageDE extends ObjectsPage {
         System.out.println("playerList size: "+playerList.size());
         for (int i=0; i<playerList.size();i++){
             userClickAddPlayerButton();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(selectPlayerButton));
             userSelectPlayerForTeam(playerList.get(i).getFamily(), playerList.get(i).getName());
             userTypePlayerNumber();
             userSelectPlayerPosition();

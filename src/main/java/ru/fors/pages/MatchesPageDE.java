@@ -17,6 +17,8 @@ public class MatchesPageDE extends ObjectsPage{
     By pageTitle = By.xpath("//th[text()='Spiele']");
     By matchDate = By.id("P2041_TGM_DATE");
     By team2Field = By.id("P2041_TGM_RIVAL");
+    By statusField = By.id("P2043_TGM_STATUS_CODE_DISPLAY");
+
 
     @Step("Проверяем открылась ли страница матчи")
     public boolean isMatchesPageLoaded(){
@@ -35,7 +37,7 @@ public class MatchesPageDE extends ObjectsPage{
     @Step("Пользователь выбирает команду")
     public void userSelectTeam1() {
         Select select = new Select(driver.findElement(By.id("P2041_TGM_TEAM_ID")));
-        select.selectByVisibleText("Dinamo192912");
+        select.selectByVisibleText(team.getName());
     }
     @Step("Пользователь выбирает состав")
     public void userSelectRoster(){
@@ -84,9 +86,16 @@ public class MatchesPageDE extends ObjectsPage{
         userSelectCompetitionType();
         userSelectTypeTeam2();
         userTypeTeam2();
-        userSelectStartTime();
-        userSelectEndTime();
+        //userSelectStartTime();
+        //userSelectEndTime();
         userClickCreateButton();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(statusField));
+    }
+
+    @Step("Пользователь проверяет статус матча")
+    public String checkMatchStatus(){
+        return getElementText(statusField);
     }
 
 

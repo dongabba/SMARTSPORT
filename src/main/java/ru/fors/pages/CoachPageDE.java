@@ -24,7 +24,7 @@ public class CoachPageDE extends ObjectsPage{
     By coachName = By.id("P23_NAM");
     By coachBirthPlace = By.id("P23_BIRTH_PLACE");
     By coachBornDate = By.id("P23_BORN_DD");
-    By contactPage = By.linkText("Kontakte");
+
     By coachPage = By.linkText("Trainer");
     By coachTeams = By.cssSelector("a[href*='P23_MENU_SELECTED:TEAMS']");
     By coachTeamsTitle = By.xpath("//th[text()='Mannschaften ']");
@@ -76,7 +76,7 @@ public class CoachPageDE extends ObjectsPage{
 
     @Step("Пользователь создает тренера")
     public void userCreateCoach2(){
-        for (int i=0; i<3; i++){
+        for (int i=0; i<2; i++){
             userGoToCoaches();
             userClickCreateButton();
             wait.until(ExpectedConditions.presenceOfElementLocated(coachFamily));
@@ -98,12 +98,6 @@ public class CoachPageDE extends ObjectsPage{
         for (int i=0; i< coachList.size(); i++){
             System.out.println(coachList.get(i).getName()+" "+coachList.get(i).getFamily());
         }
-    }
-
-    @Step("Пользователь переходит в раздел Контакты")
-    public void userGoToContacts(){
-        click(contactPage);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(pageTitle));
     }
 
     @Step("Пользователь переходит в раздел Тренеры")

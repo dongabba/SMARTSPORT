@@ -10,8 +10,11 @@
 				<methods>
 					<exclude name=".*" />
 					<include name="userCreateCoachTest" />
+					<include name="userCreatePlayerTest" />
 					<include name="userCreateTeamTest" />
-					<include name="userEditTeamTest" />
+					<include name="userAddCoachesToTeamTest" />
+					<include name="userAddPlayersToTeamTest" />
+					<include name="userCreateMatchTest" />
 				</methods>
 			</class>
 		</classes>

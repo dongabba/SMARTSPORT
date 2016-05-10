@@ -2,6 +2,7 @@ package ru.fors.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import ru.fors.data.Player;
 
@@ -19,6 +20,8 @@ public class PlayersPageDE extends ObjectsPage{
     By bornDatePlayer = By.id("P23_BORN_DD");
     By mainPositionCheckBox = By.id("P23_POSITIONS_COL_MAIN_3");
     By subPositionCheckBox = By.id("P23_POSITIONS_COL2_6");
+    By playersLink = By.linkText("Spieler");
+    By playerStatusSelect = By.id("P12_ACTUAL_SELECTOR");
 
     public boolean ensurePlayersPageOpen(){
         return ensurePageLoaded(pageTitle);
@@ -58,7 +61,11 @@ public class PlayersPageDE extends ObjectsPage{
     }
 
     public void userCreatePlayer(){
-        for (int i=0;i<11;i++){
+        for (int i=0;i<2;i++){
+            userGoToContacts();
+            userGoToPlayersPage();
+            userClickCreateButton();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(familyPlayerField));
             Player player = new Player();
             player.setName(getValueFromList(namesDE));
             player.setFamily(getValueFromList(familysDE));
@@ -70,12 +77,22 @@ public class PlayersPageDE extends ObjectsPage{
             userSelectPlayerPosition();
             userSelectPlayerSubposition();
             userClickCreateButton();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
             playerList.add(player);
         }
 
     }
 
+    public void userPrintPlayers(){
+        for (int i=0; i<playerList.size(); i++){
+            System.out.println(playerList.get(i).getName()+" "+playerList.get(i).getFamily());
+        }
+    }
 
+    private void userGoToPlayersPage() {
+        click(playersLink);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(playerStatusSelect));
+    }
 
 
 }

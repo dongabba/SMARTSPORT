@@ -35,18 +35,15 @@ public class CreateTestData extends TestBase{
         coachPageDE.printCoaches();
     }
 
-    @Features("Работа с объектом \"Игрок\"")
+    @Features("Создание тестовых данных")
     @Stories("Создание игрока")
     @Test
     public void userCreatePlayerTest(){
         MainPage mainPage = new MainPage(driver);
         MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
-        PlayersPageDE playersPageDE = mainPageDE.userGoToPlayersPage();
-        assertTrue("Не открылся раздел Игроки", playersPageDE.ensurePlayersPageOpen());
-        playersPageDE.userClickCreateButton();
-        assertTrue("Не открылся раздел создания игрока", playersPageDE.ensureCreatePageOpen());
+        PlayersPageDE playersPageDE = new PlayersPageDE(driver);
         playersPageDE.userCreatePlayer();
-        assertTrue("Не создалася игрок", playersPageDE.isCreatedOk());
+        playersPageDE.userPrintPlayers();
     }
 
     @Features("Работа с объектом \"Команда\"")
@@ -63,13 +60,56 @@ public class CreateTestData extends TestBase{
         assertTrue("Не создалась команда", teamsPageDE.isCreatedOk());
     }
     @Features("Работа с объектом \"Команда\"")
-    @Stories("Редактирование команды")
+    @Stories("Добавление в команду тренеров")
     @Test
-    public void userEditTeamTest(){
+    public void userAddCoachesToTeamTest(){
         TeamsPageDE teamsPageDE = new TeamsPageDE(driver);
         teamsPageDE.userClickTeamsLink();
         teamsPageDE.userEditTeam2();
         teamsPageDE.userAddCoachToTeam();
+    }
+
+    @Features("Работа с объектом \"Команда\"")
+    @Stories("Добавление в команду игроков")
+    @Test
+    public void userAddPlayersToTeamTest(){
+        TeamsPageDE teamsPageDE = new TeamsPageDE(driver);
+        teamsPageDE.userClickTeamsLink();
+        teamsPageDE.userEditTeam();
+        teamsPageDE.userAddPlayerToTeam2();
+    }
+
+    @Features("Работа с объектом \"Матч\"")
+    @Stories("Создание матча")
+    @Test
+    public void userCreateMatchTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        MatchesPageDE matchesPageDE = mainPageDE.userGoToMatchesPage();
+        assertTrue("Не открылся раздел Матч", matchesPageDE.isMatchesPageLoaded());
+        matchesPageDE.userClickCreateButton();
+        assertTrue("Не открылся раздел создания матча", matchesPageDE.isMatchCreatedPageLoaded());
+        matchesPageDE.userCreateMatch();
+        assertTrue("Не создалася матч", matchesPageDE.isCreatedOk());
+        assertTrue("Статус матча отличный от Новый", matchesPageDE.checkMatchStatus().equals("New"));
+    }
+
+    @Features("Работа с объектом \"Матч\"")
+    @Stories("Изменение статуса матча с Новый на Запланированно")
+    @Test
+    public void userChangeMatchStatusTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        MatchesPageDE matchesPageDE = mainPageDE.userGoToMatchesPage();
+        assertTrue("Не открылся раздел Матч", matchesPageDE.isMatchesPageLoaded());
+
+        matchesPageDE.userClickCreateButton();
+        assertTrue("Не открылся раздел создания матча", matchesPageDE.isMatchCreatedPageLoaded());
+        matchesPageDE.userCreateMatch();
+        assertTrue("Не создалася матч", matchesPageDE.isCreatedOk());
+        assertTrue("Статус матча отличный от Новый", matchesPageDE.checkMatchStatus().equals("New"));
     }
 
 }
