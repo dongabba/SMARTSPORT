@@ -175,4 +175,31 @@ public class CreateTestData extends TestBase{
         assertTrue("Не удалось создать группу упражнений", exercisesPageDE.isCreatedOk());
     }
 
+    @Features("Работа с объектом \"Тренировка\"")
+    @Stories("Создание тренировки")
+    @Test
+    public void userCreateTrainingTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        TrainingsPageDE trainingsPageDE = mainPageDE.userGoToTrainingsPage();
+        assertTrue("Не открылся раздел Тренировки", trainingsPageDE.isTrainingsPageOpen());
+        trainingsPageDE.userClickCreateButton();
+        assertTrue("Не открылась страница создания тренировки", trainingsPageDE.isCreateTrainingPageOpen());
+        trainingsPageDE.userCreateTraining();
+        assertTrue("Не удалось создать тренировку", trainingsPageDE.isCreatedOk());
+    }
+
+    @Features("Работа с объектом \"Тренировка\"")
+    @Stories("Добавление в тренировку упражнения")
+    @Test
+    public void userAddExerciseToTrainingTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        TrainingsPageDE trainingsPageDE = mainPageDE.userGoToTrainingsPage();
+        assertTrue("Не открылся раздел Тренировки", trainingsPageDE.isTrainingsPageOpen());
+        trainingsPageDE.userAddExerciseToTraining();
+    }
+
 }

@@ -76,4 +76,6 @@ public class ObjectsPage extends Page{
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchComplete));
     }
 
+
+
 }

@@ -8,19 +8,21 @@
 		<classes>
 			<class name="ru.fors.tests.CreateTestData">
 				<methods>
-					<exclude name=".*" />
-					<!--<include name="userCreateCoachTest" />
-					<include name="userCreatePlayerTest" />
-					<include name="userCreateTeamTest" />
-					<include name="userAddCoachesToTeamTest" />
-					<include name="userAddPlayersToTeamTest" />
-					<include name="userCreateMatchTest" />
-					<include name="userChangeMatchStatusToPlanTest" />
-					<include name="userChangeMatchProtocolTest" />
+                    <!--<exclude name=".*" />
+                    <include name="userCreateCoachTest" />
+                    <include name="userCreatePlayerTest" />
+                    <include name="userCreateTeamTest" />
+                    <include name="userAddCoachesToTeamTest" />
+                    <include name="userAddPlayersToTeamTest" />
+                    <include name="userCreateMatchTest" />
+                    <include name="userChangeMatchStatusToPlanTest" />
+                    <include name="userChangeMatchProtocolTest" />
                     <include name="userSetPlayerRaitingsTest" />
-					<include name="userChangeMatchStatusToApplyTest" /> -->
+                    <include name="userChangeMatchStatusToApplyTest" />
 					<include name="userCreateExercisesGroupTest" />
                     <include name="userCreateExercisesTest" />
+                    <include name="userCreateTrainingTest" /> -->
+                    <include name="userAddExerciseToTrainingTest" />
 				</methods>
 			</class>
 		</classes>
