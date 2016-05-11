@@ -162,4 +162,17 @@ public class CreateTestData extends TestBase{
         assertTrue("Не удалось создать группу упражнений", exercisesPageDE.isCreatedOk());
     }
 
+    @Features("Работа с объектом \"Реестр упражнений\"")
+    @Stories("Создание упражнения")
+    @Test
+    public void userCreateExercisesTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        ExercisesPageDE exercisesPageDE = mainPageDE.userGoToExercisesPage();
+        assertTrue("Не открылся раздел Реестр упражнений", exercisesPageDE.isExercisesPageOpen());
+        exercisesPageDE.userCreateExercise();
+        assertTrue("Не удалось создать группу упражнений", exercisesPageDE.isCreatedOk());
+    }
+
 }

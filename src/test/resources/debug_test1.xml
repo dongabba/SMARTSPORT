@@ -20,6 +20,7 @@
                     <include name="userSetPlayerRaitingsTest" />
 					<include name="userChangeMatchStatusToApplyTest" /> -->
 					<include name="userCreateExercisesGroupTest" />
+                    <include name="userCreateExercisesTest" />
 				</methods>
 			</class>
 		</classes>
