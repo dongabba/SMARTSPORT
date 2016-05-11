@@ -147,4 +147,19 @@ public class CreateTestData extends TestBase{
         //assertTrue("Статус матча не изменился на Завершен", matchesPageDE.checkMatchStatus().equals("Durchgeführte"));
     }
 
+    @Features("Работа с объектом \"Реестр упражнений\"")
+    @Stories("Создание группы упражнений")
+    @Test
+    public void userCreateExercisesGroupTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        ExercisesPageDE exercisesPageDE = mainPageDE.userGoToExercisesPage();
+        assertTrue("Не открылся раздел Реестр упражнений", exercisesPageDE.isExercisesPageOpen());
+        exercisesPageDE.userClickCreateExercisesGroupButton();
+        assertTrue("Не открылась страница создания группы упражнений", exercisesPageDE.isCreateExercisesGroupPageOpen());
+        exercisesPageDE.userCreateExercisesGroup();
+        assertTrue("Не удалось создать группу упражнений", exercisesPageDE.isCreatedOk());
+    }
+
 }

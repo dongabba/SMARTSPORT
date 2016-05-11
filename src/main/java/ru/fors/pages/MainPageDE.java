@@ -18,6 +18,7 @@ public class MainPageDE extends MainPage {
     By matchesLink = By.linkText("Spiele"); //матчи
     By coachLink = By.linkText("Trainer"); //тренеры
     By mainPageLink = By.linkText("Startseite");//главная
+    By exercisesPageLink = By.linkText("Register der Übungen"); //реестр упражнений
 
 
 
@@ -59,6 +60,12 @@ public class MainPageDE extends MainPage {
     public void userGoToMainPage(){
         click(mainPageLink);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("R453335050170429910")));
+    }
+
+    @Step("Пользователь переходит на страницу реестр упражнений")
+    public ExercisesPageDE userGoToExercisesPage(){
+        click(exercisesPageLink);
+        return new ExercisesPageDE(driver);
     }
 
 }

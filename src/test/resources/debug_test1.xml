@@ -9,7 +9,7 @@
 			<class name="ru.fors.tests.CreateTestData">
 				<methods>
 					<exclude name=".*" />
-					<include name="userCreateCoachTest" />
+					<!--<include name="userCreateCoachTest" />
 					<include name="userCreatePlayerTest" />
 					<include name="userCreateTeamTest" />
 					<include name="userAddCoachesToTeamTest" />
@@ -18,7 +18,8 @@
 					<include name="userChangeMatchStatusToPlanTest" />
 					<include name="userChangeMatchProtocolTest" />
                     <include name="userSetPlayerRaitingsTest" />
-					<include name="userChangeMatchStatusToApplyTest" />
+					<include name="userChangeMatchStatusToApplyTest" /> -->
+					<include name="userCreateExercisesGroupTest" />
 				</methods>
 			</class>
 		</classes>
