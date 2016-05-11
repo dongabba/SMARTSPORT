@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.Random;
+
 /**
  * Created by Alexander Zhaleiko on 04.05.2016.
  */
@@ -15,6 +17,7 @@ public class MatchesPageDE extends ObjectsPage{
     }
 
     By pageTitle = By.xpath("//th[text()='Spiele']");
+    By protocolpageTitle = By.xpath("//th[text()='Protokoll']");
     By matchDate = By.id("P2041_TGM_DATE");
     By team2Field = By.id("P2041_TGM_RIVAL");
     By statusField = By.id("P2043_TGM_STATUS_CODE_DISPLAY");
@@ -22,6 +25,10 @@ public class MatchesPageDE extends ObjectsPage{
     By deleteMatchButton = By.linkText("löschen");
     By saveMatchButton = By.linkText("speichern");
     By closeGameButton = By.linkText("spiel beenden");
+    By editProtocolButton = By.id("B351828634086123992");
+    By addEventToProtocolButton = By.linkText("hinzufügen");
+    By cancelButton = By.linkText("zurück");
+
 
 
     @Step("Проверяем открылась ли страница матчи")
@@ -41,7 +48,7 @@ public class MatchesPageDE extends ObjectsPage{
     @Step("Пользователь выбирает команду")
     public void userSelectTeam1() {
         Select select = new Select(driver.findElement(By.id("P2041_TGM_TEAM_ID")));
-        select.selectByVisibleText("FC Ingolstadt");
+        select.selectByVisibleText(team.getName());
     }
     @Step("Пользователь выбирает состав")
     public void userSelectRoster(){
@@ -104,8 +111,8 @@ public class MatchesPageDE extends ObjectsPage{
 
     @Step("Пользователь ищет матч")
     public void userFindMatch(){
-        //userSearchObject(team.getName());
-        userSearchObject("FC Ingolstadt");
+        userSearchObject(team.getName());
+        //userSearchObject("FC Ingolstadt");
     }
 
     @Step("Пользователь открывает найденный матч")
@@ -137,6 +144,47 @@ public class MatchesPageDE extends ObjectsPage{
         wait.until(ExpectedConditions.invisibilityOfElementLocated(closeGameButton));
         wait.until(ExpectedConditions.visibilityOfElementLocated(statusField));
     }
+
+    @Step("Пользователш добавляет событие Гол в протокол")
+    public void userAddEventToMatchProtocol(String event1, String id){
+        Select player = new Select(driver.findElement(By.id("f04_"+id)));
+        Random random = new Random();
+        int i = random.nextInt(playerList.size()-1);
+        player.selectByVisibleText(playerList.get(i).getFamily()+" "+playerList.get(i).getName()+" ("+team.getName()+")");
+        Select event = new Select(driver.findElement(By.id("f05_"+id)));
+        event.selectByVisibleText(event1);
+        int time = random.nextInt(90);
+        type(By.id("f06_"+id), Integer.toString(time));
+    }
+
+    @Step("Пользователь редактирует протокол матча")
+    public void userEditMatchProtocol(){
+        userFindMatch();
+        userOpenMatch();
+        click(editMatchButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(closeGameButton));
+        click(editProtocolButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(protocolpageTitle));
+        click(addEventToProtocolButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("f04_0001")));
+        userAddEventToMatchProtocol("Tor", "0001");
+        click(addEventToProtocolButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("f04_0002")));
+        userAddEventToMatchProtocol("Gelbe Karten", "0002");
+        click(addEventToProtocolButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("f04_0003")));
+        userAddEventToMatchProtocol("Tor", "0003");
+        click(addEventToProtocolButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("f04_0004")));
+        userAddEventToMatchProtocol("Verschossene Elfmeter", "0004");
+        click(saveMatchButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+        click(cancelButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editMatchButton));
+
+    }
+
+
 
 
 

@@ -92,7 +92,7 @@ public class CreateTestData extends TestBase{
         assertTrue("Не открылся раздел создания матча", matchesPageDE.isMatchCreatedPageLoaded());
         matchesPageDE.userCreateMatch();
         assertTrue("Не создалася матч", matchesPageDE.isCreatedOk());
-        assertTrue("Статус матча отличный от Новый", matchesPageDE.checkMatchStatus().equals("New"));
+        assertTrue("Статус матча отличный от Новый", matchesPageDE.checkMatchStatus().equals("Neue"));
     }
 
     @Features("Работа с объектом \"Матч\"")
@@ -105,7 +105,7 @@ public class CreateTestData extends TestBase{
         MatchesPageDE matchesPageDE = mainPageDE.userGoToMatchesPage();
         assertTrue("Не открылся раздел Матч", matchesPageDE.isMatchesPageLoaded());
         matchesPageDE.userReplaceMatchStatusToPlan();
-        assertTrue("Статус матча не изменился на Запланированно", matchesPageDE.checkMatchStatus().equals("Plan"));
+        assertTrue("Статус матча не изменился на Запланированно", matchesPageDE.checkMatchStatus().equals("Geplante"));
     }
 
     @Features("Работа с объектом \"Матч\"")
@@ -118,7 +118,20 @@ public class CreateTestData extends TestBase{
         MatchesPageDE matchesPageDE = mainPageDE.userGoToMatchesPage();
         assertTrue("Не открылся раздел Матч", matchesPageDE.isMatchesPageLoaded());
         matchesPageDE.userReplaceMatchStatusToApply();
-        assertTrue("Статус матча не изменился на Завершен", matchesPageDE.checkMatchStatus().equals("Apply"));
+        assertTrue("Статус матча не изменился на Завершен", matchesPageDE.checkMatchStatus().equals("Durchgeführte"));
+    }
+
+    @Features("Работа с объектом \"Матч\"")
+    @Stories("Изменение статуса матча с Новый на Запланированно")
+    @Test
+    public void userChangeMatchProtocolTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        MatchesPageDE matchesPageDE = mainPageDE.userGoToMatchesPage();
+        assertTrue("Не открылся раздел Матч", matchesPageDE.isMatchesPageLoaded());
+        matchesPageDE.userEditMatchProtocol();
+        //assertTrue("Статус матча не изменился на Завершен", matchesPageDE.checkMatchStatus().equals("Durchgeführte"));
     }
 
 }
