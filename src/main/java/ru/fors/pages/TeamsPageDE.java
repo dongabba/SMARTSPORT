@@ -212,7 +212,7 @@ public class TeamsPageDE extends ObjectsPage {
     }
     @Step("Пользователь указывает основную позицию игрока")
     public void userSelectPlayerPosition(){
-        String [] playerPositionValues = {"22913", "22987", "22988", "22989", "22990"};
+        String [] playerPositionValues = {"22913", "22988", "22989", "22990"};
         Random random = new Random();
         Select select = new Select(driver.findElement(By.id("P313_POSITION_MAIN_ID")));
         select.selectByValue(playerPositionValues[random.nextInt(4)]);

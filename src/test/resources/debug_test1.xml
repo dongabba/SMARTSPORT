@@ -17,6 +17,7 @@
 					<include name="userCreateMatchTest" />
 					<include name="userChangeMatchStatusToPlanTest" />
 					<include name="userChangeMatchProtocolTest" />
+                    <include name="userSetPlayerRaitingsTest" />
 					<include name="userChangeMatchStatusToApplyTest" />
 				</methods>
 			</class>

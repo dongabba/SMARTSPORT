@@ -28,6 +28,7 @@ public class MatchesPageDE extends ObjectsPage{
     By editProtocolButton = By.id("B351828634086123992");
     By addEventToProtocolButton = By.linkText("hinzufügen");
     By cancelButton = By.linkText("zurück");
+    By raitings1stPlayer = By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr[3]/td[6]");
 
 
 
@@ -181,6 +182,42 @@ public class MatchesPageDE extends ObjectsPage{
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         click(cancelButton);
         wait.until(ExpectedConditions.visibilityOfElementLocated(editMatchButton));
+
+    }
+
+    public void userSelectRaitings(){
+        Select select = new Select(driver.findElement(By.id("P2043_TYPE_VIEW")));
+        select.selectByVisibleText("Rating");
+        wait.until(ExpectedConditions.presenceOfElementLocated(raitings1stPlayer));
+    }
+
+    public void userSelectCoach(String family, String name){
+        Select coach = new Select(driver.findElement(By.id("P2041_COACH")));
+        coach.selectByVisibleText(family+" "+name);
+    }
+
+
+    @Step("Пользователь проставляет рейтинг игрокам")
+    public void userSetPlayerRaiting(){
+        userFindMatch();
+        userOpenMatch();
+        click(editMatchButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(closeGameButton));
+        userSelectRaitings();
+        for (int y=0; y<coachList.size();y++){
+            userSelectCoach(coachList.get(y).getFamily(), coachList.get(y).getName());
+            wait.until(ExpectedConditions.presenceOfElementLocated(raitings1stPlayer));
+            for (int i=0; i<playerList.size(); i++){
+                int p=i+3;
+                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[6]//div[2]"));
+                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[7]//div[5]"));
+                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[8]//div[4]"));
+                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[9]//div[5]"));
+                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[10]//div[6]"));
+            }
+        }
+        click(saveMatchButton);
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
 
     }
 
