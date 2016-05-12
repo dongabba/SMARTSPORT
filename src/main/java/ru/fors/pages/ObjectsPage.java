@@ -38,6 +38,7 @@ public class ObjectsPage extends Page{
     public static Competition competition = new Competition();
     public static Employee employee = new Employee();
     public static Event event = new Event();
+    public static Ads ads = new Ads();
     public static ArrayList<Coach> coachList = new ArrayList<Coach>();
     public static ArrayList<Player> playerList = new ArrayList<Player>();
 

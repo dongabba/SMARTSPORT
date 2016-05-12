@@ -24,8 +24,9 @@
                     <include name="userCreateExercisesTest" />
                     <include name="userCreateTrainingTest" />
                     <include name="userAddExerciseToTrainingTest" />
-                    <include name="userCreateEmployeeTest" />  -->
-                    <include name="userCreateEventTest" />
+                    <include name="userCreateEmployeeTest" />
+                    <include name="userCreateEventTest" /> -->
+                    <include name="userCreateAdsTest" />
 				</methods>
 			</class>
 		</classes>

@@ -23,6 +23,7 @@ public class MainPageDE extends MainPage {
     By competitionsPageLink = By.linkText("Wettkämpfe");
     By employeeLink = By.linkText("Mitarbeiter");
     By eventPageLink = By.linkText("Ereignisse");
+    By adsPageLink = By.linkText("Ankündigungen");
 
 
 
@@ -94,6 +95,12 @@ public class MainPageDE extends MainPage {
     public EventPageDE userGoToEventsPage(){
         click(eventPageLink);
         return new EventPageDE(driver);
+    }
+
+    @Step("Пользователь переходит на страницу объявления")
+    public AdsPageDE userGoToAdsPage(){
+        click(adsPageLink);
+        return new AdsPageDE(driver);
     }
 
 }

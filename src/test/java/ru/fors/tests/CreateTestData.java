@@ -247,4 +247,19 @@ public class CreateTestData extends TestBase{
         assertTrue("Не удалось создать событие", eventPageDE.isCreatedOk());
     }
 
+    @Features("Работа с объектом \"Объявление\"")
+    @Stories("Создание объявления")
+    @Test
+    public void userCreateAdsTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        AdsPageDE adsPageDE = mainPageDE.userGoToAdsPage();
+        assertTrue("Не открылась страница Объявления", adsPageDE.isAdsPageOpen());
+        adsPageDE.userClickCreateButton();
+        assertTrue("Не открылась страница создвния объявления", adsPageDE.isCreateAdsPageOpen());
+        adsPageDE.userAddAds();
+        assertTrue("Не удалось создать объявление", adsPageDE.isAdsAdd());
+    }
+
 }
