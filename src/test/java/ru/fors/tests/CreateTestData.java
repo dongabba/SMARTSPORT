@@ -217,4 +217,34 @@ public class CreateTestData extends TestBase{
         assertTrue("Не удалось создать соревнование", competitionsPageDE.isCreatedOk());
     }
 
+    @Features("Работа с объектом \"Сотрудник\"")
+    @Stories("Создание сотрудника")
+    @Test
+    public void userCreateEmployeeTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        EmployeePageDE employeePageDE = mainPageDE.userGoToEmployeePage();
+        assertTrue("Не открылась страница Сотрудники", employeePageDE.isEmployeePageLoaded());
+        employeePageDE.userClickCreateButton();
+        assertTrue("Не открылась страница создвния сотрудника", employeePageDE.isCreateNewEmployeePageLoaded());
+        employeePageDE.userCreateEmployee();
+        assertTrue("Не удалось создать сотрудника", employeePageDE.isCreatedOk());
+    }
+
+    @Features("Работа с объектом \"Событие\"")
+    @Stories("Создание события")
+    @Test
+    public void userCreateEventTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        EventPageDE eventPageDE = mainPageDE.userGoToEventsPage();
+        assertTrue("Не открылась страница События", eventPageDE.isEventsPageOpen());
+        eventPageDE.userClickCreateButton();
+        assertTrue("Не открылась страница создвния события", eventPageDE.isCreateEventPageOpen());
+        eventPageDE.userCreateEvent();
+        assertTrue("Не удалось создать событие", eventPageDE.isCreatedOk());
+    }
+
 }

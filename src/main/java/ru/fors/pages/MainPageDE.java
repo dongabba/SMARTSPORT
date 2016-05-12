@@ -21,6 +21,8 @@ public class MainPageDE extends MainPage {
     By exercisesPageLink = By.linkText("Register der Übungen"); //реестр упражнений
     By trainingsPageLink = By.linkText("Trainings");
     By competitionsPageLink = By.linkText("Wettkämpfe");
+    By employeeLink = By.linkText("Mitarbeiter");
+    By eventPageLink = By.linkText("Ereignisse");
 
 
 
@@ -80,6 +82,18 @@ public class MainPageDE extends MainPage {
     public CompetitionsPageDE userGoToCompetitionsPage(){
         click(competitionsPageLink);
         return new CompetitionsPageDE(driver);
+    }
+
+    @Step("Пользователь переходит на страницу сотрудники")
+    public EmployeePageDE userGoToEmployeePage(){
+        click(employeeLink);
+        return new EmployeePageDE(driver);
+    }
+
+    @Step("Пользователь переходит на страницу события")
+    public EventPageDE userGoToEventsPage(){
+        click(eventPageLink);
+        return new EventPageDE(driver);
     }
 
 }
