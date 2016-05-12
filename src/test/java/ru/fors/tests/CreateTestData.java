@@ -202,4 +202,19 @@ public class CreateTestData extends TestBase{
         trainingsPageDE.userAddExerciseToTraining();
     }
 
+    @Features("Работа с объектом \"Соревнование\"")
+    @Stories("Создание соревнования")
+    @Test
+    public void userCreateCompetitionTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        CompetitionsPageDE competitionsPageDE = mainPageDE.userGoToCompetitionsPage();
+        assertTrue("Не открылась страница Соревнования", competitionsPageDE.isCompetitionsPageLoaded());
+        competitionsPageDE.userClickCreateButton();
+        assertTrue("Не открылась страница создвния соревнования", competitionsPageDE.isCreateNewCompetitionsPageLoaded());
+        competitionsPageDE.userCreateCompetition();
+        assertTrue("Не удалось создать соревнование", competitionsPageDE.isCreatedOk());
+    }
+
 }

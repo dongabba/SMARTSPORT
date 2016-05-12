@@ -20,6 +20,7 @@ public class MainPageDE extends MainPage {
     By mainPageLink = By.linkText("Startseite");//главная
     By exercisesPageLink = By.linkText("Register der Übungen"); //реестр упражнений
     By trainingsPageLink = By.linkText("Trainings");
+    By competitionsPageLink = By.linkText("Wettkämpfe");
 
 
 
@@ -73,6 +74,12 @@ public class MainPageDE extends MainPage {
     public TrainingsPageDE userGoToTrainingsPage(){
         click(trainingsPageLink);
         return new TrainingsPageDE(driver);
+    }
+
+    @Step("Пользователь переходит на страницу соревнования")
+    public CompetitionsPageDE userGoToCompetitionsPage(){
+        click(competitionsPageLink);
+        return new CompetitionsPageDE(driver);
     }
 
 }

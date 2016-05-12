@@ -25,6 +25,7 @@ public class Page {
 
 	Date currentDate = new Date(System.currentTimeMillis());
 	Date yesterday = new Date(System.currentTimeMillis()-86400000);
+	Date competitionEndDate = new Date(System.currentTimeMillis()+259200000);
 	DateFormat timeFormat = new SimpleDateFormat("HHmmss");
 	DateFormat date = new SimpleDateFormat("dd.MM.YYYY");
 

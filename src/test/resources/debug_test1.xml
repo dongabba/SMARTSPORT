@@ -14,6 +14,7 @@
                     <include name="userCreateTeamTest" />
                     <include name="userAddCoachesToTeamTest" />
                     <include name="userAddPlayersToTeamTest" />
+                    <include name="userCreateCompetitionTest" />
                     <include name="userCreateMatchTest" />
                     <include name="userChangeMatchStatusToPlanTest" />
                     <include name="userChangeMatchProtocolTest" />
@@ -21,8 +22,9 @@
                     <include name="userChangeMatchStatusToApplyTest" />
 					<include name="userCreateExercisesGroupTest" />
                     <include name="userCreateExercisesTest" />
-                    <include name="userCreateTrainingTest" /> -->
-                    <include name="userAddExerciseToTrainingTest" />
+                    <include name="userCreateTrainingTest" />
+                    <include name="userAddExerciseToTrainingTest" />  -->
+
 				</methods>
 			</class>
 		</classes>

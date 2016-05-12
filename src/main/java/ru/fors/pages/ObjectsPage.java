@@ -3,10 +3,7 @@ package ru.fors.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import ru.fors.data.Coach;
-import ru.fors.data.Exercises;
-import ru.fors.data.Player;
-import ru.fors.data.Team;
+import ru.fors.data.*;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
@@ -38,6 +35,7 @@ public class ObjectsPage extends Page{
 
     public static Team team = new Team();
     public static Exercises exercises = new Exercises();
+    public static Competition competition = new Competition();
     public static ArrayList<Coach> coachList = new ArrayList<Coach>();
     public static ArrayList<Player> playerList = new ArrayList<Player>();
 

@@ -60,7 +60,7 @@ public class MatchesPageDE extends ObjectsPage{
     @Step("Пользователь выбирает тип соревнования")
     public void userSelectCompetitionType(){
         Select select = new Select(driver.findElement(By.id("P2041_TGM_TYPE_CODE")));
-        select.selectByValue("FRIEND");
+        select.selectByVisibleText(competition.getName());
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("P2041_TGM_TOURNAMENT_ID")));
     }
 
