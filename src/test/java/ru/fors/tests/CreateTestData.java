@@ -262,4 +262,32 @@ public class CreateTestData extends TestBase{
         assertTrue("Не удалось создать объявление", adsPageDE.isAdsAdd());
     }
 
+    @Features("Работа с объектом \"Просматриваемый игрок\"")
+    @Stories("Создание просматриваемого игрока")
+    @Test
+    public void userCreateScoutedPlayerTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        ScoutedPlayerPageDE scoutedPlayerPageDE = mainPageDE.userGoToScoutedPlayerPage();
+        assertTrue("Не открылась страница Просматриваемые игроки", scoutedPlayerPageDE.isScoutedPlayersPageOpen());
+        scoutedPlayerPageDE.userClickCreateButton();
+        assertTrue("Не открылась страница создания просматриваемого игрока", scoutedPlayerPageDE.isCreateScoutedPlayerPageOpen());
+        scoutedPlayerPageDE.userCreateScoutedPlayer();
+        assertTrue("Не удалось создать просматриваемого игрока", scoutedPlayerPageDE.isScoutedPlayerCreated());
+    }
+
+    @Features("Работа с объектом \"Просматриваемый игрок\"")
+    @Stories("Добавление просматриваемого игрока в команду")
+    @Test
+    public void userAddScoutedPlayerToTeamTest(){
+        MainPage mainPage = new MainPage(driver);
+        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
+        mainPageDE.userGoToMainPage();
+        ScoutedPlayerPageDE scoutedPlayerPageDE = mainPageDE.userGoToScoutedPlayerPage();
+        assertTrue("Не открылась страница Просматриваемые игроки", scoutedPlayerPageDE.isScoutedPlayersPageOpen());
+        scoutedPlayerPageDE.userTransferScoutedPlayerToClub();
+        assertTrue("Не удалось добавить просматриваемого игрока в клуб", scoutedPlayerPageDE.isCreatedOk());
+    }
+
 }

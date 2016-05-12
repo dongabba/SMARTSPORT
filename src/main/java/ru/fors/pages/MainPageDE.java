@@ -24,6 +24,7 @@ public class MainPageDE extends MainPage {
     By employeeLink = By.linkText("Mitarbeiter");
     By eventPageLink = By.linkText("Ereignisse");
     By adsPageLink = By.linkText("Ankündigungen");
+    By scoutedPlayersPageLink = By.linkText("Spielerübersicht"); //просматриваемые игроки
 
 
 
@@ -64,7 +65,7 @@ public class MainPageDE extends MainPage {
     @Step("Пользователь открывает главную страницу")
     public void userGoToMainPage(){
         click(mainPageLink);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("R453335050170429910")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("R371129962098587179")));
     }
 
     @Step("Пользователь переходит на страницу реестр упражнений")
@@ -101,6 +102,12 @@ public class MainPageDE extends MainPage {
     public AdsPageDE userGoToAdsPage(){
         click(adsPageLink);
         return new AdsPageDE(driver);
+    }
+
+    @Step("Пользователь переходит на страницу просматриваемых игроков")
+    public ScoutedPlayerPageDE userGoToScoutedPlayerPage(){
+        click(scoutedPlayersPageLink);
+        return new ScoutedPlayerPageDE(driver);
     }
 
 }
