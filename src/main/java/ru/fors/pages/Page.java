@@ -49,6 +49,7 @@ public class Page {
 	}
 	
 	public void click(By element){
+		wait.until(ExpectedConditions.elementToBeClickable(element));
 		driver.findElement(element).click();
 	}
 	
