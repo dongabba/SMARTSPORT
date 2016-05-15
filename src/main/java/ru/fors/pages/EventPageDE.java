@@ -68,7 +68,7 @@ public class EventPageDE extends ObjectsPage{
     }
     @Step("Пользователь выбирает тип события")
     private void userSelectEventType() {
-        String [] eventTypes = {"Sonstiges", "Termin", "Mahlzeit", "Prozeduren", "Auswärtsspiel ", "Übung", "Medizinische Untersuchung", "Erinnerung"};
+        String [] eventTypes = {"Sonstiges", "Termin", "Mahlzeit", "Prozeduren", "Auswärtsspiel", "Übung", "Medizinische Untersuchung", "Erinnerung"};
         Random random = new Random();
         event.setType(eventTypes[random.nextInt(7)]);
         Select eventType = new Select(driver.findElement(By.id("P2061_CEV_TYPE_CODE")));
