@@ -10,21 +10,21 @@ import ru.yandex.qatools.allure.annotations.Step;
  * Created by Alexander Zhaleiko on 11.05.2016.
  */
 public class TrainingsPageDE extends ObjectsPage {
-    public TrainingsPageDE(WebDriver driver) {
+    TrainingsPageDE(WebDriver driver) {
         super(driver);
     }
 
-    By pageTitle = By.xpath("//th[text()='Trainings']");
-    By pageEditTrainingTitle = By.xpath("//th[text()='Aufgaben']");
-    By trainingDate = By.id("P2031_TRG_DATE");
-    By timeFrom = By.id("P2031_TRG_FROM");
-    By timeTo = By.id("P2031_TRG_TO");
-    By saveTrainingButton = By.cssSelector("img[title='Erstellen']");
-    By saveTrainingButton2 = By.cssSelector("img[title='Speichern']");
-    By editTrainingButton = By.cssSelector("img[title='Bearbeiten']");
-    By addExerciseButton = By.cssSelector("img[title='Добавить задачу']");
-    By selectExerciseButton = By.linkText("wählen");
-    By trainingNameCheckbox = By.cssSelector("input[type='checkbox']");
+    private By pageTitle = By.xpath("//th[text()='Trainings']");
+    private By pageEditTrainingTitle = By.xpath("//th[text()='Aufgaben']");
+    private By trainingDate = By.id("P2031_TRG_DATE");
+    private By timeFrom = By.id("P2031_TRG_FROM");
+    private By timeTo = By.id("P2031_TRG_TO");
+    private By saveTrainingButton = By.cssSelector("img[title='Erstellen']");
+    private By saveTrainingButton2 = By.cssSelector("img[title='Speichern']");
+    private By editTrainingButton = By.cssSelector("img[title='Bearbeiten']");
+    private By addExerciseButton = By.cssSelector("img[title='Добавить задачу']");
+    private By selectExerciseButton = By.linkText("wählen");
+    private By trainingNameCheckbox = By.cssSelector("input[type='checkbox']");
 
     public boolean isTrainingsPageOpen(){
         return ensurePageLoaded(pageTitle);
@@ -53,7 +53,7 @@ public class TrainingsPageDE extends ObjectsPage {
         stadium.selectByValue("45");
     }
 
-    public void userClickSaveTrainingButton(){
+    private void userClickSaveTrainingButton(){
         click(saveTrainingButton);
     }
 

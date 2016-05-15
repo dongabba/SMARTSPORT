@@ -27,5 +27,25 @@ public class PlayerTests extends TestBase{
         }
     }
 
+    @Features("Работа с объектом \"Игрок\"")
+    @Stories("Создание первого игрока")
+    @Test
+    public void userCreateFirstPlayerTest(){
+        PlayersPageDE playersPageDE = new PlayersPageDE(driver);
+        playersPageDE.userCreatePlayer();
+        assertTrue("Ошибка при сохранении игрока", playersPageDE.isCreatedOk());
+        playersPageDE.userPrintPlayers();
+    }
+
+    @Features("Работа с объектом \"Игрок\"")
+    @Stories("Создание второго игрока")
+    @Test
+    public void userCreateSecondPlayerTest(){
+        PlayersPageDE playersPageDE = new PlayersPageDE(driver);
+        playersPageDE.userCreatePlayer();
+        assertTrue("Ошибка при сохранении игрока", playersPageDE.isCreatedOk());
+        playersPageDE.userPrintPlayers();
+    }
+
 
 }

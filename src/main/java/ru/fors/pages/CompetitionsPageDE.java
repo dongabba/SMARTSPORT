@@ -5,15 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.Random;
 import java.util.Set;
 
 /**
- * Created by Alexander Zhaleyko on 12.05.2016.
+ * Created by Alexander Zhaleiko on 12.05.2016.
  */
 public class CompetitionsPageDE extends ObjectsPage{
-    public CompetitionsPageDE(WebDriver driver) {
+    CompetitionsPageDE(WebDriver driver) {
         super(driver);
     }
 
@@ -24,15 +25,15 @@ public class CompetitionsPageDE extends ObjectsPage{
     private By startDate = By.id("P2210_DATE_START");
     private By endDate = By.id("P2210_DATE_END");
     private By teamCount = By.id("P2210_TEAM_COUNT");
-
+    @Step("Проверяем открылась ли раздел Соревнования")
     public boolean isCompetitionsPageLoaded(){
         return ensurePageLoaded(pageTitle);
     }
-
+    @Step("Проверяем открылась ли страница создания соревнования")
     public boolean isCreateNewCompetitionsPageLoaded(){
         return ensurePageLoaded(createNewCompetitionsPage);
     }
-
+    @Step("Пользователь создает соревнование")
     public void userCreateCompetition(){
         userSelectCity();
         userTypeCompetitionName();
@@ -41,25 +42,25 @@ public class CompetitionsPageDE extends ObjectsPage{
         userSetTeamCount();
         userClickCreateButton();
     }
-
+    @Step("Пользователь указывает количество команд")
     private void userSetTeamCount() {
         type(teamCount, "4");
     }
-
+    @Step("Пользователь указывает дату окончания")
     private void userSetEndDate() {
         type(endDate, date.format(competitionEndDate));
     }
-
+    @Step("Пользователь указывает дату начала")
     private void userSetStartDate() {
         type(startDate, date.format(currentDate));
     }
-
+    @Step("Пользователь указывает название соревнования")
     private void userTypeCompetitionName() {
         Random random = new Random();
         competition.setName("championship_"+Integer.toString(random.nextInt(1000)));
         type(competitionName, competition.getName());
     }
-
+    @Step("Пользователь указывает город проведения соревнования")
     private void userSelectCity() {
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles();

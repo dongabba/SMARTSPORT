@@ -18,7 +18,7 @@ import ru.fors.utils.WebDriverFactory;
 public class TestBase {
 	
 	protected static WebDriver driver;
-	public String baseUrl;
+	private String baseUrl;
 
 	
 	@BeforeTest
@@ -44,9 +44,13 @@ public class TestBase {
 	public void userLogin(String username, String password){
 		LoginPage loginPage = new LoginPage(driver);
 		MainPage mainPage = loginPage.userLogin(username, password);
+		if (!mainPage.getPageTitle().contains("Hauptseite."))
+		{
+			mainPage.userGoToMainPageDE();
+		}
 	}
 	
-	public static WebDriver getWebDriver(){
+	static WebDriver getWebDriver(){
 		return driver;
 	}
 	

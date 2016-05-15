@@ -12,19 +12,17 @@ public class MainPageDE extends MainPage {
     public MainPageDE(WebDriver driver) {
         super(driver);
     }
-    By logoutLink = By.linkText("Beenden"); //кнопка Выход
-    By teamsLink = By.linkText("Mannschaften"); //команды
-    By playersLink = By.linkText("Spieler"); //игроки
-    By matchesLink = By.linkText("Spiele"); //матчи
-    By coachLink = By.linkText("Trainer"); //тренеры
-    By mainPageLink = By.linkText("Startseite");//главная
-    By exercisesPageLink = By.linkText("Register der Übungen"); //реестр упражнений
-    By trainingsPageLink = By.linkText("Trainings");
-    By competitionsPageLink = By.linkText("Wettkämpfe");
-    By employeeLink = By.linkText("Mitarbeiter");
-    By eventPageLink = By.linkText("Ereignisse");
-    By adsPageLink = By.linkText("Ankündigungen");
-    By scoutedPlayersPageLink = By.linkText("Spielerübersicht"); //просматриваемые игроки
+    private By logoutLink = By.linkText("Beenden"); //кнопка Выход
+    private By teamsLink = By.linkText("Mannschaften"); //команды
+    private By matchesLink = By.linkText("Spiele"); //матчи
+    private By mainPageLink = By.linkText("Startseite");//главная
+    private By exercisesPageLink = By.linkText("Register der Übungen"); //реестр упражнений
+    private By trainingsPageLink = By.linkText("Trainings");
+    private By competitionsPageLink = By.linkText("Wettkämpfe");
+    private By employeeLink = By.linkText("Mitarbeiter");
+    private By eventPageLink = By.linkText("Ereignisse");
+    private By adsPageLink = By.linkText("Ankündigungen");
+    private By scoutedPlayersPageLink = By.linkText("Spielerübersicht"); //просматриваемые игроки
 
 
 
@@ -44,23 +42,12 @@ public class MainPageDE extends MainPage {
         return new TeamsPageDE(driver);
     }
 
-    @Step("Пользователь переходит в раздел игроки")
-    public PlayersPageDE userGoToPlayersPage(){
-        click(playersLink);
-        return new PlayersPageDE(driver);
-    }
-
     @Step("Пользователь переходит в раздел матчи")
     public MatchesPageDE userGoToMatchesPage(){
         click(matchesLink);
         return new MatchesPageDE(driver);
     }
 
-    @Step("Пользователь переходит в раздел тренеры")
-    public CoachPageDE userGoToСoachesPage(){
-        click(coachLink);
-        return new CoachPageDE(driver);
-    }
 
     @Step("Пользователь открывает главную страницу")
     public void userGoToMainPage(){

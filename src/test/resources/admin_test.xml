@@ -1,17 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="roleAdminTest">
-		<parameter name="username" value="azhaleiko" />
-		<parameter name="password" value="123456" />
-		<parameter name="role" value="Александр Жалейко" />
-		<test name = "UserLoginAsAdmin">
+<suite name="AcceptanceTests">
+	<parameter name="username" value="azhaleiko" />
+	<parameter name="password" value="123456" />
+	<parameter name="role" value="Александр Жалейко" />
+	<test name = "CoachTests">
 		<classes>
-			<class name="ru.fors.tests.LoginTests"/>
+			<class name="ru.fors.tests.CoachTests">
+				<methods>
+					<include name="userCreateFirstCoachTest" />
+					<include name="userCreateSecondCoachTest" />
+				</methods>
+			</class>
 		</classes>
-		</test>
-		<test name = "UserCreateTeam">
+	</test>
+	<test name = "PlayerTests">
 		<classes>
-			<class name="ru.fors.tests.TeamsTests"/>
+			<class name="ru.fors.tests.PlayerTests">
+				<methods>
+					<include name="userCreateFirstPlayerTest" />
+					<include name="userCreateSecondPlayerTest" />
+				</methods>
+			</class>
 		</classes>
-		</test>
+	</test>
+	<test name = "TeamTests">
+		<classes>
+			<class name="ru.fors.tests.TeamsTests">
+				<methods>
+					<include name="userCreateTeamTest" />
+					<include name="userAddCoachesToTeamTest" />
+					<include name="userAddPlayersToTeamTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name = "MatchTests">
+		<classes>
+			<class name="ru.fors.tests.MatchTests">
+				<methods>
+					<include name="userCreateCompetitionTest" />
+					<include name="userCreateMatchTest" />
+					<include name="userChangeMatchStatusToPlanTest" />
+					<include name="userChangeMatchProtocolTest" />
+					<include name="userSetPlayerRaitingsTest" />
+					<include name="userCheckPlayerRaitingsTest" />
+					<include name="userChangeMatchStatusToApplyTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name = "TrainingsTests">
+		<classes>
+			<class name="ru.fors.tests.TrainingTests">
+				<methods>
+					<include name="userCreateExercisesGroupTest" />
+					<include name="userCreateExercisesTest" />
+					<include name="userCreateTrainingTest" />
+					<include name="userAddExerciseToTrainingTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name = "EmployeeTests">
+		<classes>
+			<class name="ru.fors.tests.EmployeeTests">
+				<methods>
+					<include name="userCreateEmployeeTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name = "EventsTests">
+		<classes>
+			<class name="ru.fors.tests.EventsTests">
+				<methods>
+					<include name="userCreateEventTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name = "AdsTests">
+		<classes>
+			<class name="ru.fors.tests.AdsTests">
+				<methods>
+					<include name="userCreateAdsTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name = "ScoutedPlayersTests">
+		<classes>
+			<class name="ru.fors.tests.ScoutedPlayerTests">
+				<methods>
+					<include name="userCreateScoutedPlayerTest" />
+					<include name="userAddScoutedPlayerToTeamTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
 </suite>

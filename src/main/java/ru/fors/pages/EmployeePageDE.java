@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
 
 /**
- * Created by Alexander Zhaleyko on 12.05.2016.
+ * Created by Alexander Zhaleiko on 12.05.2016.
  */
 public class EmployeePageDE extends ObjectsPage{
-    public EmployeePageDE(WebDriver driver) {
+    EmployeePageDE(WebDriver driver) {
         super(driver);
     }
 

@@ -6,7 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.fors.data.Team;
+import ru.fors.data.Coach;
+import ru.fors.data.Player;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.Random;
@@ -20,26 +21,25 @@ public class TeamsPageDE extends ObjectsPage {
         super(driver);
     }
 
-    By pageTitle = By.xpath("//th[text()='Mannschaften']");
-    By teamLink = By.linkText("Mannschaften");
-    By createTeamPageTitle = By.linkText("Mannschaft");
-    By teamNameField = By.id("P1306_NAME");
-    By shortTeamNameField = By.id("P1306_SHORT_NAME");
-    By citySelectButton = By.xpath("//*[@id='P1306_CITY_ID_holder']//img");
-    By ageGroupSelect = By.id("P1306_AGE_GROUP");
-    By descriptionField = By.id("P1306_DESCRIPTION");
-    By searchField = By.id("apexir_SEARCH");
-    By searchResultLink = By.xpath("//tbody/tr[2]/td[1]/a/img");
-    By searchComplete = By.id("apexir_CONTROL_PANEL_COMPLETE");
-    By findButton = By.id("apexir_btn_SEARCH");
-    By teamPlayersLink = By.linkText("Spieler");
-    By teamPlayersTitle = By.xpath("//th[text()='Spieler']");
-    By addPlayerButton = By.linkText("hinzufügen");
-    By selectPlayerButton = By.xpath(".//*[@id='P313_PLAYER_ID_holder']//img");
-    By selectCoachButton = By.xpath(".//*[@id='P353_COACH_ID_holder']//img");
-    By playerNumber = By.id("P313_PLAYER_NUMBER");
-    By teamCoachesLink = By.linkText("Trainerrat");
-    By teamCoachesTitle = By.xpath("//th[text()='Trainerrat']");
+    private By pageTitle = By.xpath("//th[text()='Mannschaften']");
+    private By teamLink = By.linkText("Mannschaften");
+    private By createTeamPageTitle = By.linkText("Mannschaft");
+    private By teamNameField = By.id("P1306_NAME");
+    private By shortTeamNameField = By.id("P1306_SHORT_NAME");
+    private By citySelectButton = By.xpath("//*[@id='P1306_CITY_ID_holder']//img");
+    private By descriptionField = By.id("P1306_DESCRIPTION");
+    private By searchField = By.id("apexir_SEARCH");
+    private By searchResultLink = By.xpath("//tbody/tr[2]/td[1]/a/img");
+    private By searchComplete = By.id("apexir_CONTROL_PANEL_COMPLETE");
+    private By findButton = By.id("apexir_btn_SEARCH");
+    private By teamPlayersLink = By.linkText("Spieler");
+    private By teamPlayersTitle = By.xpath("//th[text()='Spieler']");
+    private By addPlayerButton = By.linkText("hinzufügen");
+    private By selectPlayerButton = By.xpath(".//*[@id='P313_PLAYER_ID_holder']//img");
+    private By selectCoachButton = By.xpath(".//*[@id='P353_COACH_ID_holder']//img");
+    private By playerNumber = By.id("P313_PLAYER_NUMBER");
+    private By teamCoachesLink = By.linkText("Trainerrat");
+    private By teamCoachesTitle = By.xpath("//th[text()='Trainerrat']");
 
 
 
@@ -47,12 +47,12 @@ public class TeamsPageDE extends ObjectsPage {
         return ensurePageLoaded(pageTitle);
     }
 
-    public boolean ensurecreateTeamPageLoaded() {
+    public boolean ensureCreateTeamPageLoaded() {
         return ensurePageLoaded(createTeamPageTitle);
     }
 
 
-    public void userSelectCity() {
+    private void userSelectCity() {
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles();
         click(citySelectButton);
@@ -73,46 +73,50 @@ public class TeamsPageDE extends ObjectsPage {
         driver.switchTo().window(originalWindow);
     }
 
-    public void userTypeTeamName(String teamName) {
+    @Step("Пользователь указывает имя команды")
+    private void userTypeTeamName(String teamName) {
         type(teamNameField, teamName);
     }
-
-    public void userTypeShortTeamName(String shortTeamName) {
+    @Step("Пользователь указывает сокращенное имя команды")
+    private void userTypeShortTeamName(String shortTeamName) {
         type(shortTeamNameField, shortTeamName);
     }
-
-    public void userSelectAgeGroup() {
+    @Step("Пользователь указывает возрастную группу команды")
+    private void userSelectAgeGroup() {
         Select select = new Select(driver.findElement(By.id("P1306_AGE_GROUP")));
         select.selectByValue("394");
     }
-
-    public void userTypeDescription(String description) {
+    
+    @Step("Пользователь указывает описание для команды")
+    private void userTypeDescription(String description) {
         type(descriptionField, description);
     }
 
+    @Step("Пользователь создает команду")
     public void userCreateTeam() {
-        team.setName(getValueFromList(teamsDe));
+        Random random = new Random();
+        team.setName(getValueFromList(teamsDe)+Integer.toString(random.nextInt(99)));
         userTypeTeamName(team.getName());
         userTypeShortTeamName("FC");
         userSelectCity();
         userSelectAgeGroup();
         userTypeDescription(team.getName());
         userClickCreateButton();
-        System.out.println("Создана команда: " + team.getName());
     }
 
-    public void userEditTeam() {
+    @Step("Пользователь редактирует команду")
+    public void userEditTeamForAddPlayers() {
         userSearchTeam(team.getName());
         userOpenTeam();
         userGoToPlayersTeam();
     }
-
-    public void userEditTeam2() {
+    @Step("Пользователь редактирует команду")
+    public void userEditTeamForAddCoaches() {
         userSearchTeam(team.getName());
         userOpenTeam();
         userGoToCoachesTeam();
     }
-
+    @Step("Пользователь переходит в раздел тренеры команды")
     private void userGoToCoachesTeam() {
         click(teamCoachesLink);
         wait.until(ExpectedConditions.visibilityOfElementLocated(teamCoachesTitle));
@@ -126,7 +130,7 @@ public class TeamsPageDE extends ObjectsPage {
     }
 
     @Step("Пользователь выполняет поиск команды")
-    public void userSearchTeam(String teamName) {
+    private void userSearchTeam(String teamName) {
         type(searchField, teamName);
         System.out.println("Выполняем поиск команды: " + team.getName());
         click(findButton);
@@ -134,33 +138,33 @@ public class TeamsPageDE extends ObjectsPage {
     }
 
     @Step("Пользователь открывает найденную команду")
-    public void userOpenTeam() {
+    private void userOpenTeam() {
         click(searchResultLink);
         wait.until(ExpectedConditions.visibilityOfElementLocated(createTeamPageTitle));
     }
 
     @Step("Пользователь переходит в раздел игроки команды")
-    public void userGoToPlayersTeam() {
+    private void userGoToPlayersTeam() {
         click(teamPlayersLink);
         wait.until(ExpectedConditions.visibilityOfElementLocated(teamPlayersTitle));
     }
 
     @Step("Пользователь нажмимает кнопку добавить игрока")
-    public void userClickAddPlayerButton(){
+    private void userClickAddPlayerButton(){
         click(addPlayerButton);
         wait.until(ExpectedConditions.visibilityOfElementLocated(selectPlayerButton));
 
     }
 
     @Step("Пользователь нажмимает кнопку добавить тренерв")
-    public void userClickAddCoachButton(){
+    private void userClickAddCoachButton(){
         click(addPlayerButton);
         wait.until(ExpectedConditions.visibilityOfElementLocated(selectCoachButton));
 
     }
 
     @Step("Пользователь выбирает игрока в команду")
-    public void userSelectPlayerForTeam(String playerFamily, String playerName){
+    private void userSelectPlayerForTeam(String playerFamily, String playerName){
         By player = By.linkText(playerFamily+" "+playerName);
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles();
@@ -182,8 +186,8 @@ public class TeamsPageDE extends ObjectsPage {
         driver.switchTo().window(originalWindow);
     }
 
-    @Step("Пользователь добавляет тренера в команду")
-    public void userSelectCoachForTeam(String coachFamily, String coachName){
+    @Step("Пользователь выбирает тренера в команду")
+    private void userSelectCoachForTeam(String coachFamily, String coachName){
         By coach = By.linkText(coachFamily+" "+coachName);
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles();
@@ -206,12 +210,12 @@ public class TeamsPageDE extends ObjectsPage {
     }
 
     @Step("Пользователь указывает номер игрока")
-    public void userTypePlayerNumber(){
+    private void userTypePlayerNumber(){
         Random random = new Random();
         type(playerNumber, Integer.toString(random.nextInt(99)));
     }
     @Step("Пользователь указывает основную позицию игрока")
-    public void userSelectPlayerPosition(){
+    private void userSelectPlayerPosition(){
         String [] playerPositionValues = {"22913", "22988", "22989", "22990"};
         Random random = new Random();
         Select select = new Select(driver.findElement(By.id("P313_POSITION_MAIN_ID")));
@@ -219,7 +223,7 @@ public class TeamsPageDE extends ObjectsPage {
     }
 
     @Step("Пользователь указывает дополнительную позицию игрока")
-    public void userSelectPlayerSubPosition(){
+    private void userSelectPlayerSubPosition(){
         String [] playerSubPositionValues = {"23138","22914","23108","23000"
                 ,"23110"
                 ,"23109"
@@ -251,36 +255,26 @@ public class TeamsPageDE extends ObjectsPage {
         select.selectByValue(playerSubPositionValues[random.nextInt(28)]);
     }
 
-
-    @Step("Пользователь добавляет игрока в команду")
-    public void userAddPlayerToTeam(){
-        userClickAddPlayerButton();
-        //userSelectPlayerForTeam(player.getFamily(), player.getName());
-        userTypePlayerNumber();
-        userSelectPlayerPosition();
-        userSelectPlayerSubPosition();
-        userClickCreateButton();
-    }
-
+    
     @Step("Пользователь добавляет тренера в команду")
     public void userAddCoachToTeam(){
         System.out.println("coachList size: "+coachList.size());
-        for (int i=0; i<coachList.size();i++){
+        for (Coach coach: coachList){
             userClickAddCoachButton();
-            userSelectCoachForTeam(coachList.get(i).getFamily(), coachList.get(i).getName());
+            userSelectCoachForTeam(coach.getFamily(), coach.getName());
             userClickCreateButton();
             wait.until(ExpectedConditions.presenceOfElementLocated(successMessage));
         }
 
     }
 
-    @Step("Пользователь добавляет игрока в команду")
-    public void userAddPlayerToTeam2(){
+    @Step("Пользователь добавляет игроков в команду")
+    public void userAddPlayersToTeam(){
         System.out.println("playerList size: "+playerList.size());
-        for (int i=0; i<playerList.size();i++){
+        for (Player player : playerList){
             userClickAddPlayerButton();
             wait.until(ExpectedConditions.visibilityOfElementLocated(selectPlayerButton));
-            userSelectPlayerForTeam(playerList.get(i).getFamily(), playerList.get(i).getName());
+            userSelectPlayerForTeam(player.getFamily(), player.getName());
             userTypePlayerNumber();
             userSelectPlayerPosition();
             userSelectPlayerSubPosition();

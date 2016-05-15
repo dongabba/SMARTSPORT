@@ -33,77 +33,29 @@ public class TeamsTests extends TestBase{
         TeamsPageDE teamsPageDE = mainPageDE.userGoToTeamsPage();
         assertTrue("Не открылся раздел Команды", teamsPageDE.ensureTeamsPageLoaded());
         teamsPageDE.userClickCreateButton();
-        assertTrue("Не открылся раздел создания команды", teamsPageDE.ensurecreateTeamPageLoaded());
+        assertTrue("Не открылся раздел создания команды", teamsPageDE.ensureCreateTeamPageLoaded());
         teamsPageDE.userCreateTeam();
         assertTrue("Не создалась команда", teamsPageDE.isCreatedOk());
     }
     @Features("Работа с объектом \"Команда\"")
-    @Stories("Редактирование команды")
+    @Stories("Добавление в команду тренеров")
     @Test
-    public void userEditTeamTest(){
+    public void userAddCoachesToTeamTest(){
         TeamsPageDE teamsPageDE = new TeamsPageDE(driver);
         teamsPageDE.userClickTeamsLink();
-        teamsPageDE.userEditTeam();
-        teamsPageDE.userAddPlayerToTeam();
-        assertTrue("Не добавился игрок в команду", teamsPageDE.isCreatedOk());
+        teamsPageDE.userEditTeamForAddCoaches();
+        teamsPageDE.userAddCoachToTeam();
+        assertTrue("Ошибка при добавлении игроков", teamsPageDE.isCreatedOk());
     }
 
-    @Features("Работа с объектом \"Игрок\"")
-    @Stories("Создание игрока")
+    @Features("Работа с объектом \"Команда\"")
+    @Stories("Добавление в команду игроков")
     @Test
-    public void userCreatePlayerTest(){
-        MainPage mainPage = new MainPage(driver);
-        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
-        PlayersPageDE playersPageDE = mainPageDE.userGoToPlayersPage();
-        assertTrue("Не открылся раздел Игроки", playersPageDE.ensurePlayersPageOpen());
-        playersPageDE.userClickCreateButton();
-        assertTrue("Не открылся раздел создания игрока", playersPageDE.ensureCreatePageOpen());
-        playersPageDE.userCreatePlayer();
-        assertTrue("Не создалася игрок", playersPageDE.isCreatedOk());
-    }
-
-    @Features("Работа с объектом \"Матч\"")
-    @Stories("Создание матча")
-    @Test
-    public void userCreateMatchTest(){
-        MainPage mainPage = new MainPage(driver);
-        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
-        MatchesPageDE matchesPageDE = mainPageDE.userGoToMatchesPage();
-        assertTrue("Не открылся раздел Матч", matchesPageDE.isMatchesPageLoaded());
-        matchesPageDE.userClickCreateButton();
-        assertTrue("Не открылся раздел создания матча", matchesPageDE.isMatchCreatedPageLoaded());
-        matchesPageDE.userCreateMatch();
-        assertTrue("Не создалася матч", matchesPageDE.isCreatedOk());
-    }
-
-    @Features("Работа с объектом \"Тренер\"")
-    @Stories("Создание тренера")
-    @Test
-    public void userCreateCoachTest(){
-        MainPage mainPage = new MainPage(driver);
-        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
-        CoachPageDE coachPageDE = new CoachPageDE(driver);
-        for (int i=0; i<3; i++) {
-            mainPageDE.userGoToСoachesPage();
-            assertTrue("Не открылся раздел Тренер", coachPageDE.isCoachPageLoaded());
-            coachPageDE.userClickCreateButton();
-            assertTrue("Не открылся раздел создания тренера", coachPageDE.isCoachCreatedPageLoaded());
-            //oachPageDE.userCreateCoach();
-            assertTrue("Не создалася тренер", coachPageDE.isCreatedOk());
-            coachPageDE.userGoToContacts();
-        }
-        coachPageDE.printCoaches();
-    }
-
-    @Features("Работа с объектом \"Тренер\"")
-    @Stories("Добавление тренера в команду")
-    @Test
-    public void userAddCoachToTeamTest(){
-        MainPage mainPage = new MainPage(driver);
-        MainPageDE mainPageDE = mainPage.userGoToMainPageDE();
-        mainPageDE.userGoToMainPage();
-        CoachPageDE coachPageDE = new CoachPageDE(driver);
-        coachPageDE.userSetCoachTeam();
-        assertTrue("Тренер не добавлен в команду", coachPageDE.isCreatedOk());
+    public void userAddPlayersToTeamTest(){
+        TeamsPageDE teamsPageDE = new TeamsPageDE(driver);
+        teamsPageDE.userClickTeamsLink();
+        teamsPageDE.userEditTeamForAddPlayers();
+        teamsPageDE.userAddPlayersToTeam();
+        assertTrue("Ошибка при добавлении игроков", teamsPageDE.isCreatedOk());
     }
 }

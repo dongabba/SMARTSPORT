@@ -19,9 +19,9 @@ public class ObjectsPage extends Page{
         super(driver);
     }
     By successMessage = By.id("success-message");
-    By createButton = By.linkText("erstellen");
-    By contactPage = By.linkText("Kontakte");
-    By contactPageTitle = By.xpath("//th[text()='Kontakte']");
+    private By createButton = By.linkText("erstellen");
+    private By contactPage = By.linkText("Kontakte");
+    private By contactPageTitle = By.xpath("//th[text()='Kontakte']");
     By searchField = By.id("apexir_SEARCH");
     By searchResultLink = By.xpath("//tbody/tr[2]/td[1]/a/img");
     By searchComplete = By.id("apexir_CONTROL_PANEL_COMPLETE");
@@ -33,17 +33,17 @@ public class ObjectsPage extends Page{
     List<String> teamsDe = Arrays.asList("Alemannia", "FC Erzgebirge", "TG Viktoria", "FC Union", "BFC Dynamo", "BFC Viktoria 1889", "Energie", "Borussia", "Fortuna", "Eintracht", "FC Rot-Weiß", "FC Ingolstadt", "FC Gütersloh 2000", "VfR Heilbronn", "FC Carl Zeiss", "FC Kaiserslautern", "Kickers", "Holstein", "FC Lokomotive", "Red Bull", "FC Bayern", "FC Hansa", "FC Schalke 04", "SSV Buer", "FC St. Pauli", "SV Sandhausen", "FC Zeitz");
     List<String> cityForTeams = Arrays.asList("INSBRUK (Austria)", "L`YEZH (Austria)", "RID (Austria)", "VENA (Austria)", "VINER-NOYSHTADT (Austria)", "VOL`FSBERG (Austria)", "ZAL`TSBURG (Austria)", "BAKU (AZERBAYDZHAN)", "Bruges (Belgium)", "BRYUSSEL` (Belgium)", "GENK (Belgium)", "BARANOVICHI (BELORUSSIYA)", "BORISOV (BELORUSSIYA)", "BREST (BELORUSSIYA)", "GOMEL` (BELORUSSIYA)", "GRODNO (BELORUSSIYA)", "MINSK (BELORUSSIYA)", "MOGILEV (BELORUSSIYA)", "NOVOPOLOTSK (BELORUSSIYA)", "SOLIGORSK (BELORUSSIYA)", "VITEBSK (BELORUSSIYA)", "BELU-ORIZONTI (BRAZILIYA)", "RIO-DE-ZHANEYRO (BRAZILIYA)", "SAN-PAULU (BRAZILIYA)", "LIBERETS (CHEKHIYA)", "PRAGA (CHEKHIYA)", "TEPLITSE (CHEKHIYA)", "ESB`YERG (Denmark)", "KOPENGAGEN (Denmark)", "BARSELONA (ESPAÑA)", "GOROD1 (ESPAÑA)", "MADRID (ESPAÑA)", "VALLADOLID (ESPAÑA)", "TALLIN (ESTONIYA)", "ESPOO (FINLYANDIYA)", "KHEL`SINKI (FINLYANDIYA)", "YARO (FINLYANDIYA)", "KAL`VI (France)", "LION (France)", "MONTEGYU (France)", "Paris (France)", "APENSEN (Germany)", "BERLIN (Germany)", "BREMEN (Germany)", "DORTMUND (Germany)", "DYUSSEL`DORF (Germany)", "GAMBURG (Germany)", "GEL`ZENKIRKHEN (Germany)", "KHOFFENKHAYM (Germany)", "MYUNKHEN (Germany)", "OLEG (Germany)", "AFINY (GRETSIYA)", "SALONIKI (GRETSIYA)", "TBILISI (GRUZIYA)", "BERGAMO (Italy)", "BOLON`YA (Italy)", "EMPOLI (Italy)", "Milan (Italy)", "PISTOYYA (Italy)", "RIM (Italy)", "TURIN (Italy)", "TURIN, BORGARO-TORINEZE (Italy)", "VERONA (Italy)", "VERONA, SAN-BONIFACHO (Italy)", "VICHENTSA (Italy)", "TEL`-AVIV (IZRAIL`)", "AKTAU (KAZAKHSTAN)", "AKTOBE (KAZAKHSTAN)", "ALMA-ATA (KAZAKHSTAN)", "ALMATY (KAZAKHSTAN)", "ASTANA (KAZAKHSTAN)", "ATYRAU (KAZAKHSTAN)", "PAVLODAR (KAZAKHSTAN)", "PETROPAVLOVSK (KAZAKHSTAN)", "SEMEY (KAZAKHSTAN)", "SEMIPALATINSK (KAZAKHSTAN)", "TARAZ (KAZAKHSTAN)", "UST`-KAMENOGORSK (KAZAKHSTAN)", "SPLIT (KHORVATIYA)", "ZAGREB (KHORVATIYA)", "BISHKEK (KIRGIZIYA)", "KANT (KIRGIZIYA)", "KARAKOL (KIRGIZIYA)", "LATGALIYA (LATVIYA)", "LIYEPAYA (LATVIYA)", "RIGA (LATVIYA)", "YURMALA (LATVIYA)", "ZEMGALE (LATVIYA)", "KAUNAS (LITVA)", "PALANGA (LITVA)", "VIL`NYUS (LITVA)", "KISHINEV (MOLDAVIYA)", "TIRASPOL` (MOLDAVIYA)", "AMSTERDAM (NIDERLANDY)", "APELDORN (NIDERLANDY)", "ARNEM (NIDERLANDY)", "DEVENTER (NIDERLANDY)", "ENSKHEDE (NIDERLANDY)", "EYNDKHOVEN (NIDERLANDY)", "GAAGA (NIDERLANDY)", "MAASTRIKHT (NIDERLANDY)", "ROTTERDAM (NIDERLANDY)", "KRISTIANSANN (NORVEGIYA)", "STAVANGER (NORVEGIYA)", "ABU-DABI (OB`YEDINENNYYE ARABSKIYE EMIRATY )", "BELOSTOK (POL`SHA)", "KRAKOV (POL`SHA)", "LODZ` (POL`SHA)", "LYUBIN (POL`SHA)", "POZNAN` (POL`SHA)", "VARSHAVA (POL`SHA)", "ZHERMANOVITSE (POL`SHA)", "LISSABON (PORTUGALIYA)", "PORTU (PORTUGALIYA)");
 
-    public static Team team = new Team();
-    public static Exercises exercises = new Exercises();
-    public static Competition competition = new Competition();
-    public static Employee employee = new Employee();
-    public static Event event = new Event();
-    public static Ads ads = new Ads();
-    public static ScoutedPlayer scoutedPlayer = new ScoutedPlayer();
-    public static ArrayList<Coach> coachList = new ArrayList<Coach>();
-    public static ArrayList<Player> playerList = new ArrayList<Player>();
+    static Team team = new Team();
+    static Exercises exercises = new Exercises();
+    static Competition competition = new Competition();
+    static Employee employee = new Employee();
+    static Event event = new Event();
+    static Ads ads = new Ads();
+    static ScoutedPlayer scoutedPlayer = new ScoutedPlayer();
+    static ArrayList<Coach> coachList = new ArrayList<Coach>();
+    static ArrayList<Player> playerList = new ArrayList<Player>();
 
-    public String getValueFromList(List<String> list){
+    String getValueFromList(List<String> list){
         int i= list.size();
         Random random = new Random();
         return list.get(random.nextInt(i));
@@ -66,13 +66,13 @@ public class ObjectsPage extends Page{
     }
 
     @Step("Пользователь переходит в раздел Контакты")
-    public void userGoToContacts(){
+    void userGoToContacts(){
         click(contactPage);
         wait.until(ExpectedConditions.visibilityOfElementLocated(contactPageTitle));
     }
 
     @Step("Пользователь выполняет поиск объекта")
-    public void userSearchObject(String objName) {
+    void userSearchObject(String objName) {
         type(searchField, objName);
         click(findButton);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchComplete));

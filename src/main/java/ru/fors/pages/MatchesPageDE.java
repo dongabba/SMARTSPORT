@@ -2,34 +2,39 @@ package ru.fors.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.fors.data.Coach;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by Alexander Zhaleiko on 04.05.2016.
  */
 public class MatchesPageDE extends ObjectsPage{
-    public MatchesPageDE(WebDriver driver) {
+    MatchesPageDE(WebDriver driver) {
         super(driver);
     }
 
-    By pageTitle = By.xpath("//th[text()='Spiele']");
-    By protocolpageTitle = By.xpath("//th[text()='Protokoll']");
-    By matchDate = By.id("P2041_TGM_DATE");
-    By team2Field = By.id("P2041_TGM_RIVAL");
-    By statusField = By.id("P2043_TGM_STATUS_CODE_DISPLAY");
-    By editMatchButton = By.linkText("bearbeiten");
-    By deleteMatchButton = By.linkText("löschen");
-    By saveMatchButton = By.linkText("speichern");
-    By closeGameButton = By.linkText("spiel beenden");
-    By editProtocolButton = By.id("B351828634086123992");
-    By addEventToProtocolButton = By.linkText("hinzufügen");
-    By cancelButton = By.linkText("zurück");
-    By raitings1stPlayer = By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr[3]/td[6]");
-
+    private By pageTitle = By.xpath("//th[text()='Spiele']");
+    private By protocolpageTitle = By.xpath("//th[text()='Protokoll']");
+    private By matchDate = By.id("P2041_TGM_DATE");
+    private By team2Field = By.id("P2041_TGM_RIVAL");
+    private By statusField = By.id("P2043_TGM_STATUS_CODE_DISPLAY");
+    private By editMatchButton = By.linkText("bearbeiten");
+    private By deleteMatchButton = By.linkText("löschen");
+    private By saveMatchButton = By.linkText("speichern");
+    private By closeGameButton = By.linkText("spiel beenden");
+    private By editProtocolButton = By.id("B351828634086123992");
+    private By addEventToProtocolButton = By.linkText("hinzufügen");
+    private By cancelButton = By.linkText("zurück");
+    private By raitings1stPlayer = By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr[3]/td[6]");
+    private By comprtitionSelectButton = By.xpath(".//*[@id='P2041_TGM_TOURNAMENT_ID_holder']//img");
+    private static int raitingsCount = 0;
 
 
     @Step("Проверяем открылась ли страница матчи")
@@ -42,42 +47,64 @@ public class MatchesPageDE extends ObjectsPage{
         return ensurePageLoaded(matchDate);
     }
     @Step("Пользователь устанавливает дату матча")
-    public void userTypeMatchDate(){
+    private void userTypeMatchDate(){
         type(matchDate, date.format(currentDate));
         System.out.println("Date: "+date.format(yesterday));
     }
     @Step("Пользователь выбирает команду")
-    public void userSelectTeam1() {
+    private void userSelectTeam1() {
         Select select = new Select(driver.findElement(By.id("P2041_TGM_TEAM_ID")));
         select.selectByVisibleText(team.getName());
     }
     @Step("Пользователь выбирает состав")
-    public void userSelectRoster(){
+    private void userSelectRoster(){
         Select select = new Select(driver.findElement(By.id("P2041_TGM_TEAM_TP_CODE")));
         select.selectByValue("TEAM1");
     }
 
     @Step("Пользователь выбирает тип соревнования")
-    public void userSelectCompetitionType(){
+    private void userSelectCompetitionType(){
         Select select = new Select(driver.findElement(By.id("P2041_TGM_TYPE_CODE")));
-        select.selectByVisibleText(competition.getName());
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("P2041_TGM_TOURNAMENT_ID")));
+        select.selectByVisibleText("Wettbewerb");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("P2041_TGM_TOURNAMENT_ID")));
+    }
+
+    @Step("Пользователь выбирает название соревнования")
+    private void userSelectCompetitionName(){
+        String originalWindow = driver.getWindowHandle();
+        final Set<String> oldWindowsSet = driver.getWindowHandles();
+        click(comprtitionSelectButton);
+        String newWindow = (new WebDriverWait(driver, 10))
+                .until(new ExpectedCondition<String>() {
+                           public String apply(WebDriver driver) {
+                               Set<String> newWindowsSet = driver.getWindowHandles();
+                               newWindowsSet.removeAll(oldWindowsSet);
+                               return newWindowsSet.size() > 0 ?
+                                       newWindowsSet.iterator().next() : null;
+                           }
+                       }
+                );
+        driver.switchTo().window(newWindow);
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText(competition.getName())));
+        click(By.linkText(competition.getName()));
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(cityLink));
+        driver.switchTo().window(originalWindow);
     }
 
     @Step("Пользователь выбирает тип выбора соперника")
-    public void userSelectTypeTeam2(){
+    private void userSelectTypeTeam2(){
         Select select = new Select(driver.findElement(By.id("P2041_RIVAL_ENTER_TYPE")));
         select.selectByValue("2");
         wait.until(ExpectedConditions.elementToBeClickable(team2Field));
     }
 
     @Step("Пользователь вводит команду соперника")
-    public void userTypeTeam2(){
-        type(team2Field, "FC Belshina Bobryisk");
+    private void userTypeTeam2(){
+        type(team2Field, "FC Torpedo Moscow");
     }
 
     @Step("Пользователь выбирает время начала")
-    public void userSelectStartTime(){
+    private void userSelectStartTime(){
         Select select = new Select(driver.findElement(By.id("P2043_TGM_TIME_HOUR")));
         select.selectByValue("11");
         Select select1 = new Select(driver.findElement(By.id("P2043_TGM_TIME_MIN")));
@@ -85,7 +112,7 @@ public class MatchesPageDE extends ObjectsPage{
     }
 
     @Step("Пользователь выбирает время конца матча")
-    public void userSelectEndTime(){
+    private void userSelectEndTime(){
         Select select = new Select(driver.findElement(By.id("P2043_TGM_TIME_HOUR_END")));
         select.selectByValue("13");
     }
@@ -96,10 +123,9 @@ public class MatchesPageDE extends ObjectsPage{
         userSelectTeam1();
         userSelectRoster();
         userSelectCompetitionType();
+        userSelectCompetitionName();
         userSelectTypeTeam2();
         userTypeTeam2();
-        //userSelectStartTime();
-        //userSelectEndTime();
         userClickCreateButton();
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         wait.until(ExpectedConditions.visibilityOfElementLocated(statusField));
@@ -111,18 +137,17 @@ public class MatchesPageDE extends ObjectsPage{
     }
 
     @Step("Пользователь ищет матч")
-    public void userFindMatch(){
+    private void userFindMatch(){
         userSearchObject(team.getName());
-        //userSearchObject("FC Ingolstadt");
     }
 
     @Step("Пользователь открывает найденный матч")
-    public void userOpenMatch() {
+    private void userOpenMatch() {
         click(searchResultLink);
         wait.until(ExpectedConditions.visibilityOfElementLocated(statusField));
     }
 
-    @Step("Пользователь меняет статус матча")
+    @Step("Пользователь меняет статус матча на Запланированно")
     public void userReplaceMatchStatusToPlan(){
         userFindMatch();
         userOpenMatch();
@@ -135,7 +160,7 @@ public class MatchesPageDE extends ObjectsPage{
         wait.until(ExpectedConditions.visibilityOfElementLocated(statusField));
     }
 
-    @Step("Пользователь меняет статус матча")
+    @Step("Пользователь меняет статус матча на Завершен")
     public void userReplaceMatchStatusToApply(){
         userFindMatch();
         userOpenMatch();
@@ -147,7 +172,7 @@ public class MatchesPageDE extends ObjectsPage{
     }
 
     @Step("Пользователш добавляет событие Гол в протокол")
-    public void userAddEventToMatchProtocol(String event1, String id){
+    private void userAddEventToMatchProtocol(String event1, String id){
         Select player = new Select(driver.findElement(By.id("f04_"+id)));
         Random random = new Random();
         int i = random.nextInt(playerList.size()-1);
@@ -184,14 +209,14 @@ public class MatchesPageDE extends ObjectsPage{
         wait.until(ExpectedConditions.visibilityOfElementLocated(editMatchButton));
 
     }
-
-    public void userSelectRaitings(){
+    @Step("Пользователь выбирает отображение рейтинга")
+    private void userSelectRaitings(){
         Select select = new Select(driver.findElement(By.id("P2043_TYPE_VIEW")));
         select.selectByVisibleText("Rating");
         wait.until(ExpectedConditions.presenceOfElementLocated(raitings1stPlayer));
     }
-
-    public void userSelectCoach(String family, String name){
+    @Step("Пользователь тренера для выстапления/отображения рейтинга")
+    private void userSelectCoach(String family, String name){
         Select coach = new Select(driver.findElement(By.id("P2041_COACH")));
         coach.selectByVisibleText(family+" "+name);
     }
@@ -204,8 +229,8 @@ public class MatchesPageDE extends ObjectsPage{
         click(editMatchButton);
         wait.until(ExpectedConditions.visibilityOfElementLocated(closeGameButton));
         userSelectRaitings();
-        for (int y=0; y<coachList.size();y++){
-            userSelectCoach(coachList.get(y).getFamily(), coachList.get(y).getName());
+        for (Coach coach:coachList){
+            userSelectCoach(coach.getFamily(), coach.getName());
             wait.until(ExpectedConditions.presenceOfElementLocated(raitings1stPlayer));
             for (int i=0; i<playerList.size(); i++){
                 int p=i+3;
@@ -217,8 +242,30 @@ public class MatchesPageDE extends ObjectsPage{
             }
         }
         click(saveMatchButton);
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+    }
 
+    @Step("Пользователь проверяет рейтинг игроков")
+    public void userCheckPlayerRaiting(){
+        userFindMatch();
+        userOpenMatch();
+        click(editMatchButton);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(closeGameButton));
+        userSelectRaitings();
+        for (Coach coach:coachList){
+            userSelectCoach(coach.getFamily(), coach.getName());
+            wait.until(ExpectedConditions.presenceOfElementLocated(raitings1stPlayer));
+            for (int i=0; i<playerList.size(); i++){
+                int p=i+3;
+                if (driver.findElement(By.xpath("//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[11]//div[4]")).getAttribute("class").contains("star-rating-on")){
+                    raitingsCount=raitingsCount+1;
+                }
+            }
+        }
+        click(saveMatchButton);
+    }
+
+    public boolean isRaitingExist(){
+        return raitingsCount == 4;
     }
 
 

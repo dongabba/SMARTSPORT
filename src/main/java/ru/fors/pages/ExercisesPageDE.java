@@ -11,24 +11,24 @@ import java.util.Random;
  * Created by Alexander Zhaleiko on 11.05.2016.
  */
 public class ExercisesPageDE extends ObjectsPage{
-    public ExercisesPageDE(WebDriver driver) {
+    ExercisesPageDE(WebDriver driver) {
         super(driver);
     }
 
-    By pageTitle = By.xpath("//th[text()='Übungen']");
-    By createExercisesGroupPageTitle = By.xpath("//th[text()='Karteikarte der Gruppe Übungen']");
-    By createExercisesGroupButton = By.linkText("gruppe hinzufugen");
-    By exercisesGroupName = By.id("P2020_EXT_NAME");
-    By exercisesGroupMission = By.id("P2020_EXT_MISSION");
-    By createExercisesButton = By.linkText("übung hinzufugen");
-    By createExercisesPageTitle = By.xpath("//th[text()='Übungskarte']");
-    By exerciseName = By.id("P2020_EXR_NAME");
-    By exerciseAgeGroup18 = By.id("P2020_EXR_AGE_GROUPS_12");
-    By exerciseTimeMin = By.id("P2020_EXR_TIME_MIN");
-    By exerciseTimeMax = By.id("P2020_EXR_TIME_MAX");
-    By ball = By.id("f02_0002");
-    By gate = By.id("f02_0011");
-    By exerciseDescription = By.id("P2020_EXR_DESCRIPTION");
+    private By pageTitle = By.xpath("//th[text()='Übungen']");
+    private By createExercisesGroupPageTitle = By.xpath("//th[text()='Karteikarte der Gruppe Übungen']");
+    private By createExercisesGroupButton = By.linkText("gruppe hinzufugen");
+    private By exercisesGroupName = By.id("P2020_EXT_NAME");
+    private By exercisesGroupMission = By.id("P2020_EXT_MISSION");
+    private By createExercisesButton = By.linkText("übung hinzufugen");
+    private By createExercisesPageTitle = By.xpath("//th[text()='Übungskarte']");
+    private By exerciseName = By.id("P2020_EXR_NAME");
+    private By exerciseAgeGroup18 = By.id("P2020_EXR_AGE_GROUPS_12");
+    private By exerciseTimeMin = By.id("P2020_EXR_TIME_MIN");
+    private By exerciseTimeMax = By.id("P2020_EXR_TIME_MAX");
+    private By ball = By.id("f02_0002");
+    private By gate = By.id("f02_0011");
+    private By exerciseDescription = By.id("P2020_EXR_DESCRIPTION");
 
     public boolean isExercisesPageOpen(){
         return ensurePageLoaded(pageTitle);
