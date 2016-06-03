@@ -212,7 +212,7 @@ public class TeamsPageDE extends ObjectsPage {
     @Step("Пользователь указывает номер игрока")
     private void userTypePlayerNumber(){
         Random random = new Random();
-        type(playerNumber, Integer.toString(random.nextInt(99)));
+        type(playerNumber, Integer.toString(random.nextInt(99)+1));
     }
     @Step("Пользователь указывает основную позицию игрока")
     private void userSelectPlayerPosition(){
