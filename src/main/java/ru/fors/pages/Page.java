@@ -49,8 +49,17 @@ public class Page {
 	}
 	
 	public void click(By element){
-		wait.until(ExpectedConditions.elementToBeClickable(element));
-		driver.findElement(element).click();
+		int count =0;
+		while (count <5) {
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(element));
+				driver.findElement(element).click();
+				break;
+			} catch (Exception e) {
+				System.out.println("Count: " + count + " click exception" );
+				count = count + 1;
+			}
+		}
 	}
 	
 	public String getElementText(By element){
