@@ -17,10 +17,10 @@ public class ExercisesPageDE extends ObjectsPage{
 
     private By pageTitle = By.xpath("//th[text()='Übungen']");
     private By createExercisesGroupPageTitle = By.xpath("//th[text()='Karteikarte der Gruppe Übungen']");
-    private By createExercisesGroupButton = By.linkText("gruppe hinzufugen");
+    private By createExercisesGroupButton = By.linkText("gruppe hinzufügen");
     private By exercisesGroupName = By.id("P2020_EXT_NAME");
     private By exercisesGroupMission = By.id("P2020_EXT_MISSION");
-    private By createExercisesButton = By.linkText("übung hinzufugen");
+    private By createExercisesButton = By.linkText("übung hinzufügen");
     private By createExercisesPageTitle = By.xpath("//th[text()='Übungskarte']");
     private By exerciseName = By.id("P2020_EXR_NAME");
     private By exerciseAgeGroup18 = By.id("P2020_EXR_AGE_GROUPS_12");
