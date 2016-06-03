@@ -22,7 +22,7 @@ public class EmployeeTests extends TestBase {
         if (driver == null){
             init();
             userLogin(username, password);
-        } if (driver.getTitle().equals("Login")){
+        } if (driver.getTitle().equals("SmartSport")){
             userLogin(username, password);
         }
     }

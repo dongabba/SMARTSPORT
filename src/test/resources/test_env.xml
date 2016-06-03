@@ -2,6 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SmaptsportTestSuite">
 	<suite-files>
-		<suite-file path="admin_test.xml" />
+		<suite-file path="debug.xml" />
 	</suite-files>
 </suite>

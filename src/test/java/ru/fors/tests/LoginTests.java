@@ -20,7 +20,7 @@ public class LoginTests extends TestBase {
 		if (driver == null){
 			init();
 			userLogin(username, password);
-		} if (driver.getTitle().equals("login")){
+		} if (driver.getTitle().equals("SmartSport")){
 			userLogin(username, password);
 		}
 	}
