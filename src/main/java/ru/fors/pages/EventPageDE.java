@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -68,7 +66,7 @@ public class EventPageDE extends ObjectsPage{
     }
     @Step("Пользователь выбирает тип события")
     private void userSelectEventType() {
-        String [] eventTypes = {"Sonstiges", "Ankommen", "Mahlzeit", "Prozeduren", "Ausfahrt", "Unterricht", "Medizinische Untersuchung", "Erinnerung"};
+        String [] eventTypes = {"Sonstiges", "Ankommen", "Mahlzeit", "Prozeduren", "Ausfahrt", "Unterricht", "Arztliche Untersuchung", "Erinnerung"};
         Random random = new Random();
         event.setType(eventTypes[random.nextInt(7)]);
         Select eventType = new Select(driver.findElement(By.id("P2061_CEV_TYPE_CODE")));
