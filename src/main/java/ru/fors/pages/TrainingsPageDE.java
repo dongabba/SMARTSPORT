@@ -22,7 +22,7 @@ public class TrainingsPageDE extends ObjectsPage {
     private By saveTrainingButton = By.cssSelector("img[title='Erstellen']");
     private By saveTrainingButton2 = By.cssSelector("img[title='Speichern']");
     private By editTrainingButton = By.cssSelector("img[title='Bearbeiten']");
-    private By addExerciseButton = By.cssSelector("img[title='Vorlage speichern']");
+    private By addExerciseButton = By.cssSelector("img[title='Aufgabe hinzufügen']");
     private By selectExerciseButton = By.linkText("wählen");
     private By trainingNameCheckbox = By.cssSelector("input[type='checkbox']");
 
