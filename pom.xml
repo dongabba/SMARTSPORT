@@ -11,7 +11,7 @@
 	  	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	  	<allure.version>1.5.0.RC2</allure.version>
         <aspectj.version>1.8.9</aspectj.version>
-		<selenium.version>2.53.0</selenium.version>
+		<selenium.version>2.53.1</selenium.version>
 	  	<url>http://smcp-cloud.fors.ru/pls/apex/f?p=706:LOGIN</url>
 	  	<wait.seconds>30</wait.seconds>
    </properties>
