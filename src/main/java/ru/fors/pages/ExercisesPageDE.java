@@ -21,7 +21,7 @@ public class ExercisesPageDE extends ObjectsPage{
     private By exercisesGroupName = By.id("P2020_EXT_NAME");
     private By exercisesGroupMission = By.id("P2020_EXT_MISSION");
     private By createExercisesButton = By.linkText("übung hinzufügen");
-    private By createExercisesPageTitle = By.xpath("//th[text()='Übungskarte']");
+    private By createExercisesPageTitle = By.xpath("//th[text()='Übungen']");
     private By exerciseName = By.id("P2020_EXR_NAME");
     private By exerciseAgeGroup18 = By.id("P2020_EXR_AGE_GROUPS_12");
     private By exerciseTimeMin = By.id("P2020_EXR_TIME_MIN");
