@@ -16,7 +16,7 @@ public class ExercisesPageDE extends ObjectsPage{
     }
 
     private By pageTitle = By.xpath("//th[text()='Übungen']");
-    private By createExercisesGroupPageTitle = By.xpath("//th[text()='Karteikarte der Gruppe Übungen']");
+    private By createExercisesGroupPageTitle = By.xpath("//th[text()='Register der Übungen']");
     private By createExercisesGroupButton = By.linkText("gruppe hinzufügen");
     private By exercisesGroupName = By.id("P2020_EXT_NAME");
     private By exercisesGroupMission = By.id("P2020_EXT_MISSION");
