@@ -216,43 +216,26 @@ public class TeamsPageDE extends ObjectsPage {
     }
     @Step("Пользователь указывает основную позицию игрока")
     private void userSelectPlayerPosition(){
-        String [] playerPositionValues = {"22913", "22988", "22989", "22990"};
+        String [] playerPositionValues = {"22913", "22988", "22989", "22990", "22987"};
         Random random = new Random();
         Select select = new Select(driver.findElement(By.id("P313_POSITION_MAIN_ID")));
-        select.selectByValue(playerPositionValues[random.nextInt(4)]);
+        select.selectByValue(playerPositionValues[random.nextInt(5)]);
     }
 
     @Step("Пользователь указывает дополнительную позицию игрока")
     private void userSelectPlayerSubPosition(){
-        String [] playerSubPositionValues = {"23138","22914","23108","23000"
-                ,"23110"
-                ,"23109"
-                ,"23107"
+        String [] playerSubPositionValues = {"22914","23138","23110","23109"
                 ,"23116"
-                ,"23112"
                 ,"23115"
-                ,"23113"
-                ,"23114"
-                ,"23111"
-                ,"23117"
-                ,"23118"
-                ,"23119"
                 ,"23120"
                 ,"23121"
-                ,"23122"
-                ,"23123"
-                ,"23124"
-                ,"23125"
-                ,"23126"
-                ,"23127"
-                ,"23128"
-                ,"23129"
                 ,"23130"
+                ,"36808"
                 ,"23149"
                 ,"23150"};
         Random random = new Random();
         Select select = new Select(driver.findElement(By.id("P313_POSITION_ID")));
-        select.selectByValue(playerSubPositionValues[random.nextInt(28)]);
+        select.selectByValue(playerSubPositionValues[random.nextInt(12)]);
     }
 
     

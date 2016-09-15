@@ -19,7 +19,7 @@ public class PlayersPageDE extends ObjectsPage{
     private By birthPlacePlayer = By.id("P23_BIRTH_PLACE");
     private By bornDatePlayer = By.id("P23_BORN_DD");
     private By mainPositionCheckBox = By.id("P23_POSITIONS_COL_MAIN_3");
-    private By subPositionCheckBox = By.id("P23_POSITIONS_COL2_6");
+    private By subPositionCheckBox = By.id("P23_POSITIONS_COL3_2");
     private By playersLink = By.linkText("Spieler");
     private By playerStatusSelect = By.id("P12_ACTUAL_SELECTOR");
     @Step("Пользователь указывает фамилию игрока")

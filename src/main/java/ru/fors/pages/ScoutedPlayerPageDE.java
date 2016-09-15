@@ -19,7 +19,7 @@ public class ScoutedPlayerPageDE extends ObjectsPage {
     private By playerFamilyField = By.id("P208_NAM");
     private By playerBornDate = By.id("P208_BORN_DATE");
     private By playerBornYear = By.id("P208_BORN_YEAR");
-    private By playerPosition = By.id("P208_POSITIONS_COL3_4");
+    private By playerPosition = By.id("P208_POSITIONS_COL3_3");
     private By editButton = By.linkText("bearbeiten");
     private By button = By.linkText("hinzufügen");
     private By clubPageLink = By.linkText("Transfer in den Klub");
