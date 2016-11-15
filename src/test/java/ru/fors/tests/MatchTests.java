@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import ru.fors.pages.CompetitionsPageDE;
-import ru.fors.pages.MainPage;
 import ru.fors.pages.MainPageDE;
 import ru.fors.pages.MatchesPageDE;
 import ru.yandex.qatools.allure.annotations.Features;
@@ -52,7 +51,7 @@ public class MatchTests extends TestBase {
         assertTrue("Не открылся раздел создания матча", matchesPageDE.isMatchCreatedPageLoaded());
         matchesPageDE.userCreateMatch();
         assertTrue("Не создалася матч", matchesPageDE.isCreatedOk());
-        assertTrue("Статус матча отличный от Новый", matchesPageDE.checkMatchStatus().equals("Neue"));
+        assertTrue("Статус матча отличный от Новый", matchesPageDE.checkMatchStatus().equals("Neu"));
     }
 
     @Features("Работа с объектом \"Матч\"")
@@ -64,7 +63,7 @@ public class MatchTests extends TestBase {
         MatchesPageDE matchesPageDE = mainPageDE.userGoToMatchesPage();
         assertTrue("Не открылся раздел Матч", matchesPageDE.isMatchesPageLoaded());
         matchesPageDE.userReplaceMatchStatusToPlan();
-        assertTrue("Статус матча не изменился на Запланированно", matchesPageDE.checkMatchStatus().equals("Geplante"));
+        assertTrue("Статус матча не изменился на Запланированно", matchesPageDE.checkMatchStatus().equals("Geplant"));
     }
 
     @Features("Работа с объектом \"Матч\"")
@@ -76,7 +75,7 @@ public class MatchTests extends TestBase {
         MatchesPageDE matchesPageDE = mainPageDE.userGoToMatchesPage();
         assertTrue("Не открылся раздел Матч", matchesPageDE.isMatchesPageLoaded());
         matchesPageDE.userReplaceMatchStatusToApply();
-        assertTrue("Статус матча не изменился на Завершен", matchesPageDE.checkMatchStatus().equals("Durchgeführte"));
+        assertTrue("Статус матча не изменился на Завершен", matchesPageDE.checkMatchStatus().equals("Durchgeführt"));
     }
 
     @Features("Работа с объектом \"Матч\"")
