@@ -52,7 +52,7 @@ public class MainPageDE extends MainPage {
     @Step("Пользователь открывает главную страницу")
     public void userGoToMainPage(){
         click(mainPageLink);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("R371129962098587179")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("R503960050648673227")));
     }
 
     @Step("Пользователь переходит на страницу реестр упражнений")

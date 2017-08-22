@@ -2,8 +2,13 @@ package ru.fors.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.allure.annotations.Step;
+
+import java.util.Set;
 
 /**
  * Created by Alexander Zhaleiko on 12.05.2016.
@@ -19,11 +24,14 @@ public class ScoutedPlayerPageDE extends ObjectsPage {
     private By playerFamilyField = By.id("P208_NAM");
     private By playerBornDate = By.id("P208_BORN_DATE");
     private By playerBornYear = By.id("P208_BORN_YEAR");
-    private By playerPosition = By.id("P208_POSITIONS_COL3_3");
+    private By playerPosition = By.id("P208_POSITIONS_COL3_2");
     private By editButton = By.linkText("bearbeiten");
     private By button = By.linkText("hinzufügen");
     private By clubPageLink = By.linkText("Transfer in den Klub");
     private By transferToClubDate = By.id("P218_IN_DATE");
+    private By teamNameFromField = By.id("P208_TEAM_NAME");
+    private By citySelectButton = By.xpath(".//*[@id='P208_TEAM_CITY_holder']//img");
+    private By selectorSelectButton = By.xpath(".//*[@id='P208_SELECTOR_ID_holder']//img");
 
 
     @Step("Проверяем открылась ли страница просматриваемых игроков")
@@ -41,6 +49,11 @@ public class ScoutedPlayerPageDE extends ObjectsPage {
         userSetBirthDate();
         userTypeBirthDate();
         userSetPosition();
+        userSelectTeamEnterType();
+        userTypeTeamNameFrom();
+        userSelectCity();
+        userSelectCareerType();
+        userSelectSelector();
         userClickCreateButton();
     }
     @Step("Пользователь указывает позицию игрока")
@@ -110,4 +123,64 @@ public class ScoutedPlayerPageDE extends ObjectsPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchComplete));
     }
 
+    @Step("Пользователь выбирает тип ввода команды вручную")
+    private void userSelectTeamEnterType(){
+        Select select = new Select(driver.findElement(By.id("P208_TEAM_ENTER_TYPE")));
+        select.selectByValue("2");
+    }
+
+    @Step("Пользователь вводит название команды")
+    private void userTypeTeamNameFrom(){
+        type(teamNameFromField, "Dinamo");
+    }
+
+    @Step("Пользователь выбирает город")
+    private void userSelectCity() {
+        String originalWindow = driver.getWindowHandle();
+        final Set<String> oldWindowsSet = driver.getWindowHandles();
+        click(citySelectButton);
+        String newWindow = (new WebDriverWait(driver, 10))
+                .until(new ExpectedCondition<String>() {
+                           public String apply(WebDriver driver) {
+                               Set<String> newWindowsSet = driver.getWindowHandles();
+                               newWindowsSet.removeAll(oldWindowsSet);
+                               return newWindowsSet.size() > 0 ?
+                                       newWindowsSet.iterator().next() : null;
+                           }
+                       }
+                );
+        driver.switchTo().window(newWindow);
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText(getValueFromList(cityForTeams))));
+        click(By.linkText(getValueFromList(cityForTeams)));
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(cityLink));
+        driver.switchTo().window(originalWindow);
+    }
+
+    @Step("Пользователь выбирает тип карьеры")
+    private void userSelectCareerType(){
+        Select select = new Select(driver.findElement(By.id("P208_CAREER_TYPE_ID")));
+        select.selectByValue("36938");
+    }
+
+    @Step("Пользователь выбирает селекционера")
+    private void userSelectSelector() {
+        String originalWindow = driver.getWindowHandle();
+        final Set<String> oldWindowsSet = driver.getWindowHandles();
+        click(selectorSelectButton);
+        String newWindow = (new WebDriverWait(driver, 10))
+                .until(new ExpectedCondition<String>() {
+                           public String apply(WebDriver driver) {
+                               Set<String> newWindowsSet = driver.getWindowHandles();
+                               newWindowsSet.removeAll(oldWindowsSet);
+                               return newWindowsSet.size() > 0 ?
+                                       newWindowsSet.iterator().next() : null;
+                           }
+                       }
+                );
+        driver.switchTo().window(newWindow);
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("ккк к.к.")));
+        click(By.linkText("ккк к.к."));
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(cityLink));
+        driver.switchTo().window(originalWindow);
+    }
 }

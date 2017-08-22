@@ -22,18 +22,20 @@ public class MatchesPageDE extends ObjectsPage{
 
     private By pageTitle = By.xpath("//th[text()='Spiele']");
     private By protocolpageTitle = By.xpath("//th[text()='Protokoll']");
-    private By matchDate = By.id("P2041_TGM_DATE");
-    private By team2Field = By.id("P2041_TGM_RIVAL");
-    private By statusField = By.id("P2043_TGM_STATUS_CODE_DISPLAY");
+    private By matchDate = By.id("P2045_TGM_DATE");
+    private By team2Field = By.id("P2045_TGM_RIVAL");
+    private By statusField = By.id("P2045_TGM_STATUS_CODE_DISPLAY");
     private By editMatchButton = By.linkText("bearbeiten");
     private By deleteMatchButton = By.linkText("löschen");
     private By saveMatchButton = By.linkText("speichern");
     private By closeGameButton = By.linkText("spiel beenden");
-    private By editProtocolButton = By.id("B351828634086123992");
+    private By editProtocolButton = By.id("B509233124640411772");
     private By addEventToProtocolButton = By.linkText("hinzufügen");
     private By cancelButton = By.linkText("zurück");
-    private By raitings1stPlayer = By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr[3]/td[6]");
-    private By comprtitionSelectButton = By.xpath(".//*[@id='P2041_TGM_TOURNAMENT_ID_holder']//img");
+    private By raitings1stPlayer = By.xpath(".//*[@id='report_509229236384411765_catch']/table/tbody/tr[2]//tr[3]/td[4]");
+    private By comprtitionSelectButton = By.xpath(".//*[@id='P2045_TGM_TOURNAMENT_ID_holder']//img");
+    private By ovnerCheckBox = By.id("P2045_TGM_IS_OWNER_0");
+    private By editRaitingButton = By.id("B509430127234018626");
     private static int raitingsCount = 0;
 
 
@@ -53,20 +55,20 @@ public class MatchesPageDE extends ObjectsPage{
     }
     @Step("Пользователь выбирает команду")
     private void userSelectTeam1() {
-        Select select = new Select(driver.findElement(By.id("P2041_TGM_TEAM_ID")));
+        Select select = new Select(driver.findElement(By.id("P2045_TGM_TEAM_ID")));
         select.selectByVisibleText(team.getName());
     }
     @Step("Пользователь выбирает состав")
     private void userSelectRoster(){
-        Select select = new Select(driver.findElement(By.id("P2041_TGM_TEAM_TP_CODE")));
+        Select select = new Select(driver.findElement(By.id("P2045_TGM_TEAM_TP_CODE")));
         select.selectByValue("TEAM1");
     }
 
     @Step("Пользователь выбирает тип соревнования")
     private void userSelectCompetitionType(){
-        Select select = new Select(driver.findElement(By.id("P2041_TGM_TYPE_CODE")));
+        Select select = new Select(driver.findElement(By.id("P2045_TGM_TYPE_CODE")));
         select.selectByVisibleText("Wettbewerb");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("P2041_TGM_TOURNAMENT_ID")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("P2045_TGM_TOURNAMENT_ID")));
     }
 
     @Step("Пользователь выбирает название соревнования")
@@ -93,7 +95,7 @@ public class MatchesPageDE extends ObjectsPage{
 
     @Step("Пользователь выбирает тип выбора соперника")
     private void userSelectTypeTeam2(){
-        Select select = new Select(driver.findElement(By.id("P2041_RIVAL_ENTER_TYPE")));
+        Select select = new Select(driver.findElement(By.id("P2045_RIVAL_ENTER_TYPE")));
         select.selectByValue("2");
         wait.until(ExpectedConditions.elementToBeClickable(team2Field));
     }
@@ -105,15 +107,15 @@ public class MatchesPageDE extends ObjectsPage{
 
     @Step("Пользователь выбирает время начала")
     private void userSelectStartTime(){
-        Select select = new Select(driver.findElement(By.id("P2043_TGM_TIME_HOUR")));
+        Select select = new Select(driver.findElement(By.id("P2045_TGM_TIME_HOUR")));
         select.selectByValue("11");
-        Select select1 = new Select(driver.findElement(By.id("P2043_TGM_TIME_MIN")));
+        Select select1 = new Select(driver.findElement(By.id("P2045_TGM_TIME_MIN")));
         select1.selectByValue("15");
     }
 
     @Step("Пользователь выбирает время конца матча")
     private void userSelectEndTime(){
-        Select select = new Select(driver.findElement(By.id("P2043_TGM_TIME_HOUR_END")));
+        Select select = new Select(driver.findElement(By.id("P2045_TGM_TIME_HOUR_END")));
         select.selectByValue("13");
     }
 
@@ -126,6 +128,7 @@ public class MatchesPageDE extends ObjectsPage{
         userSelectCompetitionName();
         userSelectTypeTeam2();
         userTypeTeam2();
+        userCheckOwnerCheckBox();
         userClickCreateButton();
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         wait.until(ExpectedConditions.visibilityOfElementLocated(statusField));
@@ -211,14 +214,19 @@ public class MatchesPageDE extends ObjectsPage{
     }
     @Step("Пользователь выбирает отображение рейтинга")
     private void userSelectRaitings(){
-        Select select = new Select(driver.findElement(By.id("P2043_TYPE_VIEW")));
+        Select select = new Select(driver.findElement(By.id("P2045_TYPE_VIEW")));
         select.selectByVisibleText("Rating");
         wait.until(ExpectedConditions.presenceOfElementLocated(raitings1stPlayer));
     }
     @Step("Пользователь тренера для выстапления/отображения рейтинга")
     private void userSelectCoach(String family, String name){
-        Select coach = new Select(driver.findElement(By.id("P2041_COACH")));
+        Select coach = new Select(driver.findElement(By.id("P2045_COACH")));
         coach.selectByVisibleText(family+" "+name);
+    }
+
+    @Step("Пользователь нажимает кнопку редактировать рейтинг игрока")
+    public void userClickEditRaitingButton(){
+        click(editRaitingButton);
     }
 
 
@@ -229,16 +237,18 @@ public class MatchesPageDE extends ObjectsPage{
         click(editMatchButton);
         wait.until(ExpectedConditions.visibilityOfElementLocated(closeGameButton));
         userSelectRaitings();
+        userClickEditRaitingButton();
         for (Coach coach:coachList){
             userSelectCoach(coach.getFamily(), coach.getName());
             wait.until(ExpectedConditions.presenceOfElementLocated(raitings1stPlayer));
             for (int i=0; i<playerList.size(); i++){
                 int p=i+3;
-                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[6]//div[2]"));
-                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[7]//div[5]"));
-                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[8]//div[4]"));
-                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[9]//div[5]"));
-                click(By.xpath(".//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[10]//div[6]"));
+                click(By.xpath(".//*[@id='report_509229236384411765_catch']/table/tbody/tr[2]//tr["+p+"]/td[6]//div[2]"));
+                click(By.xpath(".//*[@id='report_509229236384411765_catch']/table/tbody/tr[2]//tr["+p+"]/td[7]//div[5]"));
+                click(By.xpath(".//*[@id='report_509229236384411765_catch']/table/tbody/tr[2]//tr["+p+"]/td[8]//div[4]"));
+                click(By.xpath(".//*[@id='report_509229236384411765_catch']/table/tbody/tr[2]//tr["+p+"]/td[9]//div[5]"));
+                click(By.xpath(".//*[@id='report_509229236384411765_catch']/table/tbody/tr[2]//tr["+p+"]/td[10]//div[6]"));
+                click(By.xpath(".//*[@id='report_509229236384411765_catch']/table/tbody/tr[2]//tr["+p+"]/td[11]//div[6]"));
             }
         }
         click(saveMatchButton);
@@ -256,7 +266,7 @@ public class MatchesPageDE extends ObjectsPage{
             wait.until(ExpectedConditions.presenceOfElementLocated(raitings1stPlayer));
             for (int i=0; i<playerList.size(); i++){
                 int p=i+3;
-                if (driver.findElement(By.xpath("//*[@id='report_R426286155205963830']/tbody/tr[2]//tr["+p+"]/td[11]//div[4]")).getAttribute("class").contains("star-rating-on")){
+                if (driver.findElement(By.xpath("//*[@id='report_509229236384411765_catch']/table/tbody/tr[2]//tr["+p+"]/td[11]//div[4]")).getAttribute("class").contains("star-rating-on")){
                     raitingsCount=raitingsCount+1;
                 }
             }
@@ -268,7 +278,10 @@ public class MatchesPageDE extends ObjectsPage{
         return raitingsCount == 4;
     }
 
-
+    @Step("Пользователь устанавливает признак хозяина")
+    public void userCheckOwnerCheckBox(){
+        click(ovnerCheckBox);
+    }
 
 
 

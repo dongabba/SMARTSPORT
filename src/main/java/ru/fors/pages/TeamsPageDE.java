@@ -216,26 +216,26 @@ public class TeamsPageDE extends ObjectsPage {
     }
     @Step("Пользователь указывает основную позицию игрока")
     private void userSelectPlayerPosition(){
-        String [] playerPositionValues = {"22913", "22988", "22989", "22990", "22987"};
+        String [] playerPositionValues = {"22913", "22988", "22989", "22990"};
         Random random = new Random();
         Select select = new Select(driver.findElement(By.id("P313_POSITION_MAIN_ID")));
-        select.selectByValue(playerPositionValues[random.nextInt(5)]);
+        select.selectByValue(playerPositionValues[random.nextInt(4)]);
     }
 
     @Step("Пользователь указывает дополнительную позицию игрока")
     private void userSelectPlayerSubPosition(){
-        String [] playerSubPositionValues = {"22914","23138","23110","23109"
-                ,"23116"
-                ,"23115"
+        String [] playerSubPositionValues = {"22914"
                 ,"23120"
                 ,"23121"
-                ,"23130"
-                ,"36808"
                 ,"23149"
-                ,"23150"};
+                ,"23150"
+                , "37905"
+                , "37906"
+                , "37907"
+                , "37908"};
         Random random = new Random();
         Select select = new Select(driver.findElement(By.id("P313_POSITION_ID")));
-        select.selectByValue(playerSubPositionValues[random.nextInt(12)]);
+        select.selectByValue(playerSubPositionValues[random.nextInt(9)]);
     }
 
     

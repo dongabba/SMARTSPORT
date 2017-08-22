@@ -23,7 +23,7 @@ public class ExercisesPageDE extends ObjectsPage{
     private By createExercisesButton = By.linkText("übung hinzufügen");
     private By createExercisesPageTitle = By.xpath("//th[text()='Übungen']");
     private By exerciseName = By.id("P2020_EXR_NAME");
-    private By exerciseAgeGroup18 = By.id("P2020_EXR_AGE_GROUPS_12");
+    private By exerciseAgeGroup18 = By.id("P2020_EXR_AGE_GROUPS");
     private By exerciseTimeMin = By.id("P2020_EXR_TIME_MIN");
     private By exerciseTimeMax = By.id("P2020_EXR_TIME_MAX");
     private By ball = By.id("f02_0002");
@@ -64,8 +64,10 @@ public class ExercisesPageDE extends ObjectsPage{
     @Step("Пользователь выбирает группу упражнений")
     private void userSelectExercisesGroup(){
         String tooltip = exercises.getExercisesGroup();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[tooltip=\""+tooltip+"\"]")));
-        click(By.cssSelector("a[tooltip=\""+tooltip+"\"]"));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[tooltip=\""+tooltip+"\"]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".clicked")));
+        //click(By.cssSelector("a[tooltip=\""+tooltip+"\"]"));
+        click(By.cssSelector(".clicked"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(createExercisesGroupPageTitle));
     }
 

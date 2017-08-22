@@ -4,33 +4,12 @@
 	<parameter name="username" value="azhaleiko" />
 	<parameter name="password" value="123456" />
 	<parameter name="role" value="Александр Жалейко" />
-	<test name = "CoachTests">
+	<test name = "ScoutedPlayersTests">
 		<classes>
-			<class name="ru.fors.tests.CoachTests">
+			<class name="ru.fors.tests.ScoutedPlayerTests">
 				<methods>
-					<include name="userCreateFirstCoachTest" />
-					<include name="userCreateSecondCoachTest" />
-				</methods>
-			</class>
-		</classes>
-	</test>
-	<test name = "PlayerTests">
-		<classes>
-			<class name="ru.fors.tests.PlayerTests">
-				<methods>
-					<include name="userCreateFirstPlayerTest" />
-					<include name="userCreateSecondPlayerTest" />
-				</methods>
-			</class>
-		</classes>
-	</test>
-	<test name = "TeamTests">
-		<classes>
-			<class name="ru.fors.tests.TeamsTests">
-				<methods>
-					<include name="userCreateTeamTest" />
-					<include name="userAddCoachesToTeamTest" />
-					<include name="userAddPlayersToTeamTest" />
+					<include name="userCreateScoutedPlayerTest" />
+					<include name="userAddScoutedPlayerToTeamTest" />
 				</methods>
 			</class>
 		</classes>
